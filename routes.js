@@ -154,7 +154,4 @@ router.post("/exit", (req, res) => {
 	else res.status(403).send("Not allowed");
 });
 
-
-router.get("*", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
-
 module.exports = router;
