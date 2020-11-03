@@ -2,13 +2,11 @@ const DB = require('./SQL');
 
 exports.getTeams = async (allinfo = false) => {
     let res = [];
-    global.db.connect();
 
     let teams = await DB.getTeams();
     let schools = await DB.getSchools();
     let leagues = await DB.getLeagues();
 
-    // console.log(schools.filter(s => s.ID == 14))
     for (var i in teams) {
         let temp = {
             id: teams[i].ID,
@@ -41,6 +39,42 @@ exports.getTeams = async (allinfo = false) => {
         res.push(temp)
     }
 
-    global.db.end();
+    return res;
+}
+
+exports.getSchools = async (allinfo = false) => {
+    let res = [];
+
+    let teams = await DB.getTeams();
+    let schools = await DB.getSchools();
+    let leagues = await DB.getLeagues();
+
+    for (var i in schools) {
+        let temp = {
+            id: schools[i].ID,
+            name: schools[i].name,
+            abbrev: schools[i].abbrev,
+            logo: schools[i].logo,
+            socials: {
+                instagram: schools[i].igURL,
+                twitter: schools[i].twitterURL,
+                twitch: schools[i].twitchURL,
+            }
+        }
+
+        if (allinfo) {
+            temp["teams"] = {};
+            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID)
+            for (var j in schoolTeams) temp["teams"]
+        }
+        else {
+            temp["teamIDs"] = [];
+            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID)
+            for (var j in schoolTeams) temp["teamIDs"].push(schoolTeams[j].ID)
+        }
+
+        res.push(temp)
+    }
+    
     return res;
 }

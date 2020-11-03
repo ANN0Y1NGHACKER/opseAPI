@@ -7,7 +7,9 @@ var db = mysql.createConnection({
     password : process.env.DB_PASS,
     database : process.env.DB_NAME,
 });
-global.db = db;
+db.connect();
+
+db.on("error", () => { db.connect() });
 
 exports.getTeams = async () => {
     return new Promise((res, err) => {

@@ -140,6 +140,17 @@ router.get('/teams/all', async (req, res) => {
 	res.send(JSON.stringify(data, null, 4));
 });
 
+router.get('/schools', async (req, res) => {
+	let data = await API.getSchools();
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+});
+
+router.get('/schools/all', async (req, res) => {
+	let data = await API.getSchools(true);
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+});
 
 
 
