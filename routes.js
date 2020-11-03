@@ -132,7 +132,7 @@ router.get("/createImg", async (req, res) => {
 
 
 router.post("/git-pull", async (req, res) => {
-	console.log(req.body.head_commit.committer.name)
+	console.log(req.body.head_commit.committer.name);
 	console.log("Pulling from git");
 	await exec('git pull');
 	res.send("Server in sync with git");
