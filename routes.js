@@ -133,9 +133,9 @@ router.get("/createImg-wide", async (req, res) => {
 });
 
 
-router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
-router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
-router.get('/leagues', async (req, res) => { sendJSON(res, await API.getLeagues()) });
+router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams(true)) });
+router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools(true)) });
+router.get('/leagues', async (req, res) => { sendJSON(res, await API.getLeagues(true)) });
 
 router.get('/teams/:id', async (req, res) => {
 	let data = await API.getTeams(true);
@@ -151,8 +151,9 @@ router.get('/schools/:id', async (req, res) => {
 });
 
 
-router.get('/min/teams', async (req, res) => { sendJSON(res, await API.getTeams(true)) });
-router.get('/min/schools', async (req, res) => { sendJSON(res, await API.getSchools(true)) });
+router.get('/min/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
+router.get('/min/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
+router.get('/min/leagues', async (req, res) => { sendJSON(res, await API.getSchools()) });
 
 
 
