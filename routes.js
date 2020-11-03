@@ -5,7 +5,7 @@ const router = express.Router();
 const jimp = require('jimp');
 const urlparse = require('url-parse');
 
-router.get("/", (req, res) => {
+router.get("/home", (req, res) => {
 	res.send("WORKING TEST")
 });
 
