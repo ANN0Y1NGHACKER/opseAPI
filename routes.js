@@ -7,9 +7,7 @@ const urlparse = require('url-parse');
 
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
-router.get("/home", (req, res) => {
-	res.send("WORKING")
-});
+router.get("/home", (req, res) => {res.send("WORKING")});
 
 router.get("/test", (req, res) => {res.send("TEST")});
 
