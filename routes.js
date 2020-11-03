@@ -5,6 +5,10 @@ const router = express.Router();
 const jimp = require('jimp');
 const urlparse = require('url-parse');
 
+router.get("/", (req, res) => {
+	res.send("WORKING")
+})
+
 router.get("/createImg", async (req, res) => {
 	const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
 	const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
