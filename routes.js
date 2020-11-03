@@ -137,11 +137,11 @@ router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams()) }
 router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
 
 router.get('/teams/id/:id', async (req, res) => {
-	let data = await API.getTeams();
+	let data = await API.getTeams(true);
 	sendJSON(res, data.filter(d => d.id == req.params.id));
 });
 router.get('/schools/id/:id', async (req, res) => {
-	let data = await API.getSchools();
+	let data = await API.getSchools(true);
 	sendJSON(res, data.filter(d => d.id == req.params.id));
 });
 
