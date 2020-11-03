@@ -7,8 +7,6 @@ const urlparse = require('url-parse');
 
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
-router.get("/", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
-
 router.get("/test", (req, res) => {res.send("TEST")});
 
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
@@ -155,5 +153,8 @@ router.post("/exit", (req, res) => {
 	}
 	else res.status(403).send("Not allowed");
 });
+
+
+router.get("*", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
 
 module.exports = router;
