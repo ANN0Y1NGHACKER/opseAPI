@@ -145,7 +145,7 @@ router.patch("/git-pull", async (req, res) => {
 	if (req.headers.pass) {
 		if (req.headers.pass == "5524278") {
 			console.log("Pulling from git");
-			await exec('git pull');
+			await exec('git pull origin master');
 			res.send("Server in sync with git");
 			console.log("Pulled from git");
 		}
