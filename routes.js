@@ -154,7 +154,11 @@ router.post("/git-pull", async (req, res) => {
 });
 
 router.post("/exit", (req, res) => {
-	process.exit(1);
+	if (req.headers.pass) {
+		if (req.headers.pass == process.env.STOP_PASS) process.exit(1);
+		else res.status(403).send("Incorrect passcode");
+	}
+	else res.status(403).send("Not allowed");
 });
 
 module.exports = router;
