@@ -9,7 +9,12 @@ const API = require('./modules/API');
 
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
-let sendJSON = (res, data) => {
+let sendJSON = (res, data, filter="") => {
+	if (filter != "") {
+		newData = data.filter(d => d.id == filter);
+		if (newData.length == 0) try { newData = data.filter(d => d.abbrev == filter) } catch (e) {};
+		data = newData;
+	}
 	res.header("Content-Type",'application/json');
 	res.send(JSON.stringify(data, null, 4));
 };
@@ -133,28 +138,26 @@ router.get("/createImg-wide", async (req, res) => {
 });
 
 
-router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams(true)) });
-router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools(true)) });
-router.get('/leagues', async (req, res) => { sendJSON(res, await API.getLeagues(true)) });
-
-router.get('/teams/:id', async (req, res) => {
+router.get('/teams/:id?.:min?', async (req, res) => {
 	let data = await API.getTeams(true);
-	newData = data.filter(d => d.id == req.params.id);
-	if (newData.length == 0) newData = data.filter(d => d.abbrev == req.params.id);
-	sendJSON(res, newData);
+	if (req.params.min == "min") data = await API.getTeams();
+	if (req.params.id) sendJSON(res, data, req.params.id);
+	else sendJSON(res, data);
 });
-router.get('/schools/:id', async (req, res) => {
+
+router.get('/schools/:id?.:min?', async (req, res) => {
 	let data = await API.getSchools(true);
-	newData = data.filter(d => d.id == req.params.id);
-	if (newData.length == 0) newData = data.filter(d => d.abbrev == req.params.id);
-	sendJSON(res, newData);
+	if (req.params.min == "min") data = await API.getSchools();
+	if (req.params.id) sendJSON(res, data, req.params.id);
+	else sendJSON(res, data);
 });
 
-
-router.get('/min/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
-router.get('/min/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
-router.get('/min/leagues', async (req, res) => { sendJSON(res, await API.getSchools()) });
-
+router.get('/leagues/:id?.:min?', async (req, res) => {
+	let data = await API.getLeagues(true);
+	if (req.params.min == "min") data = await API.getLeagues();
+	if (req.params.id) sendJSON(res, data, req.params.id);
+	else sendJSON(res, data);
+});
 
 
 
