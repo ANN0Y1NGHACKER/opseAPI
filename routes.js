@@ -115,8 +115,8 @@ router.get("/createImg", async (req, res) => {
 		}
 		
 
-		data[0].write(`./ImageGen/score.png`, () => {
-			res.sendFile(`${__dirname}/ImageGen/score.png`)
+		data[0].write(`./public/imageGen.png`, () => {
+			res.sendFile(`${__dirname}/public/imageGen.png`)
 		});
 	});
 });
