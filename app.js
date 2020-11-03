@@ -1,4 +1,4 @@
-let main = () => {
+function main() {
 	require('dotenv-flow').config();
 	const bodyParser = require('body-parser');
 	const express = require("express");
