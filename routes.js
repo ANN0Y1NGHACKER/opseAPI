@@ -136,13 +136,17 @@ router.get("/createImg-wide", async (req, res) => {
 router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
 router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
 
-router.get('/teams/id/:id', async (req, res) => {
+router.get('/teams/:id', async (req, res) => {
 	let data = await API.getTeams(true);
-	sendJSON(res, data.filter(d => d.id == req.params.id));
+	newData = data.filter(d => d.id == req.params.id);
+	if (newData.length == 0) newData = data.filter(d => d.abbrev == req.params.id);
+	sendJSON(res, newData);
 });
-router.get('/schools/id/:id', async (req, res) => {
+router.get('/schools/:id', async (req, res) => {
 	let data = await API.getSchools(true);
-	sendJSON(res, data.filter(d => d.id == req.params.id));
+	newData = data.filter(d => d.id == req.params.id);
+	if (newData.length == 0) newData = data.filter(d => d.abbrev == req.params.id);
+	sendJSON(res, newData);
 });
 
 
