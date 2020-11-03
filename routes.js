@@ -9,6 +9,11 @@ const API = require('./modules/API');
 
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
+let sendJSON = (res, data) => {
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+};
+
 router.get("/", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
 router.get("/index.php", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
@@ -128,42 +133,15 @@ router.get("/createImg-wide", async (req, res) => {
 });
 
 
-router.get('/teams', async (req, res) => {
-	let data = await API.getTeams();
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data, null, 4));
-});
+router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
+router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
 
-router.get('/teams/:id', async (req, res) => {
-	let data = await API.getTeams(true);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data.filter(t => t.id == req.params.id), null, 4));
-});
-
-router.get('/schools', async (req, res) => {
-	let data = await API.getSchools();
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data, null, 4));
-});
-
-router.get('/schools/:id', async (req, res) => {
-	let data = await API.getSchools(true);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data.filter(s => s.id == req.params.id), null, 4));
-});
+router.get('/teams/id/:id', async (req, res) => { sendJSON(res, await API.getTeams().filter(t => t.id == req.params.id)) });
+router.get('/schools/id/:id', async (req, res) => { sendJSON(res, await API.getTeams().filter(s => s.id == req.params.id)) });
 
 
-router.get('/min/teams', async (req, res) => {
-	let data = await API.getTeams(true);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data, null, 4));
-});
-
-router.get('/min/schools', async (req, res) => {
-	let data = await API.getSchools(true);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data, null, 4));
-});
+router.get('/min/teams', async (req, res) => { sendJSON(res, await API.getTeams(true)) });
+router.get('/min/schools', async (req, res) => { sendJSON(res, await API.getSchools(true)) });
 
 
 
