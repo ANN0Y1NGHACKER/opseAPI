@@ -14,9 +14,9 @@ router.get("/test", (req, res) => {res.send("TEST")});
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
 
 router.get("/createImg-wide", async (req, res) => {
-	// const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
-	// const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
-	// const line3 = await jimp.loadFont("./ImageGen/fonts/line3.fnt");
+	// const line1 = await jimp.loadFont("${__dirname}/ImageGen/fonts/line1.fnt");
+	// const line2 = await jimp.loadFont("${__dirname}/ImageGen/fonts/line2.fnt");
+	// const line3 = await jimp.loadFont("${__dirname}/ImageGen/fonts/line3.fnt");
 
 	const queryObject = urlparse(req.url,true).query;
 	let images = [];
@@ -26,16 +26,16 @@ router.get("/createImg-wide", async (req, res) => {
 	for (var i in queryObject) {
 		switch (i) {
 			case "game":
-				images.push(`./ImageGen/base/${queryObject[i]}.png`);
+				images.push(`${__dirname}/ImageGen/base/${queryObject[i]}.png`);
 				break;
 
 			case "l_score":
-				images.push(`./ImageGen/${queryObject[i]}L.png`);
+				images.push(`${__dirname}/ImageGen/${queryObject[i]}L.png`);
 				ls = queryObject[i];
 				break;
 		
 			case "r_score":
-				images.push(`./ImageGen/${queryObject[i]}R.png`);
+				images.push(`${__dirname}/ImageGen/${queryObject[i]}R.png`);
 				rs = queryObject[i];
 				break;
 
@@ -46,8 +46,8 @@ router.get("/createImg-wide", async (req, res) => {
 
 	if ("crown" in queryObject) {
 		if (queryObject["crown"] == "true") {
-			if (ls < rs) images.push(`./ImageGen/crownr.png`);
-			else if (ls > rs) images.push(`./ImageGen/crownl.png`);
+			if (ls < rs) images.push(`${__dirname}/ImageGen/crownr.png`);
+			else if (ls > rs) images.push(`${__dirname}/ImageGen/crownl.png`);
 		}
 	}
 
@@ -86,7 +86,7 @@ router.get("/createImg-wide", async (req, res) => {
 				// 	break;
 
 				case "left":
-					let logoIMGl_wn = await jimp.read(`./ImageGen/logos/withName/${queryObject[i]}.png`).catch((e) => {});
+					let logoIMGl_wn = await jimp.read(`${__dirname}/ImageGen/logos/withName/${queryObject[i]}.png`).catch((e) => {});
 					try {
 						logoIMGl_wn.resize(jimp.AUTO, 120)
 						data[0].composite(logoIMGl_wn, 280, 620);	
@@ -94,7 +94,7 @@ router.get("/createImg-wide", async (req, res) => {
 					break;
 
 				case "right":
-					let logoIMGr_wn = await jimp.read(`./ImageGen/logos/withName/${queryObject[i]}.png`).catch((e) => {});
+					let logoIMGr_wn = await jimp.read(`${__dirname}/ImageGen/logos/withName/${queryObject[i]}.png`).catch((e) => {});
 					try {
 						logoIMGr_wn.resize(jimp.AUTO, 120)
 						data[0].composite(logoIMGr_wn, 1030, 620);
@@ -102,7 +102,7 @@ router.get("/createImg-wide", async (req, res) => {
 					break;
 
 				case "left_logo":
-					let logoIMGl = await jimp.read(`./ImageGen/logos/${queryObject[i]}.png`).catch((e) => {});
+					let logoIMGl = await jimp.read(`${__dirname}/ImageGen/logos/${queryObject[i]}.png`).catch((e) => {});
 					try {
 						logoIMGl.resize(jimp.AUTO, 450)
 						data[0].composite(logoIMGl, 400, 300);	
@@ -110,7 +110,7 @@ router.get("/createImg-wide", async (req, res) => {
 					break;
 
 				case "right_logo":
-					let logoIMGr = await jimp.read(`./ImageGen/logos/${queryObject[i]}.png`).catch((e) => {});
+					let logoIMGr = await jimp.read(`${__dirname}/ImageGen/logos/${queryObject[i]}.png`).catch((e) => {});
 					try {
 						logoIMGr.resize(jimp.AUTO, 450)
 						data[0].composite(logoIMGr, 1070, 300);	
