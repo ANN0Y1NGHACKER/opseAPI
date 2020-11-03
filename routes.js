@@ -148,7 +148,7 @@ router.post("/git-pull", async (req, res) => {
 	}
 	else {
 		console.log("Not allowed to pull");
-		res.status(403).send("Not Allowed");
+		res.status(404).send("Not Found");
 	}
 });
 
