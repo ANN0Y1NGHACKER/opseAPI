@@ -7,13 +7,12 @@ var db = mysql.createConnection({
     password : process.env.DB_PASS,
     database : process.env.DB_NAME,
 });
-
-db.connect();
+global.db = db;
 
 exports.getTeams = async () => {
     return new Promise((res, err) => {
 		db.query(`SELECT * FROM teams`, (error, results, fields) => {
-			if (error) return err(error);
+            if (error) return err(error);
 			return res(results);
 		});
 	});
@@ -22,7 +21,7 @@ exports.getTeams = async () => {
 exports.getSchools = async () => {
     return new Promise((res, err) => {
 		db.query(`SELECT * FROM schools`, (error, results, fields) => {
-			if (error) return err(error);
+            if (error) return err(error);
 			return res(results);
 		});
 	});
@@ -31,7 +30,7 @@ exports.getSchools = async () => {
 exports.getLeagues = async () => {
     return new Promise((res, err) => {
 		db.query(`SELECT * FROM leagues`, (error, results, fields) => {
-			if (error) return err(error);
+            if (error) return err(error);
 			return res(results);
 		});
 	});

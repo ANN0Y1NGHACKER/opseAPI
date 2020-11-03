@@ -134,6 +134,12 @@ router.get('/teams', async (req, res) => {
 	res.send(JSON.stringify(data, null, 4));
 });
 
+router.get('/teams/all', async (req, res) => {
+	let data = await API.getTeams(true);
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+});
+
 
 
 
