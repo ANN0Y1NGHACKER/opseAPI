@@ -5,6 +5,8 @@ const router = express.Router();
 const jimp = require('jimp');
 const urlparse = require('url-parse');
 
+let wsUsers = JSON.parse(process.env.WS_USERS);
+
 router.get("/home", (req, res) => {
 	res.send("WORKING")
 });
@@ -132,11 +134,22 @@ router.get("/createImg", async (req, res) => {
 
 
 router.post("/git-pull", async (req, res) => {
-	console.log(req.body.head_commit.committer.name);
-	console.log("Pulling from git");
-	await exec('git pull');
-	res.send("Server in sync with git");
-	console.log("Pulled from git");
+	if (req.body.head_commit.committer.name) {
+		if (wsUsers.includes(req.body.head_commit.committer.name)) {
+			console.log("Pulling from git");
+			await exec('git pull');
+			res.send("Server in sync with git");
+			console.log("Pulled from git");
+		}
+		else {
+			console.log("Not allowed to pull");
+			res.status(403).send("Not Allowed");
+		}
+	}
+	else {
+		console.log("Not allowed to pull");
+		res.status(403).send("Not Allowed");
+	}
 });
 
 router.post("/exit", (req, res) => {
