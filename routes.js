@@ -135,7 +135,7 @@ router.get('/teams', async (req, res) => {
 });
 
 router.get('/teams/:id', async (req, res) => {
-	let data = await API.getTeams();
+	let data = await API.getTeams(true);
 	res.header("Content-Type",'application/json');
 	res.send(JSON.stringify(data.filter(t => t.id == req.params.id), null, 4));
 });
@@ -147,7 +147,7 @@ router.get('/schools', async (req, res) => {
 });
 
 router.get('/schools/:id', async (req, res) => {
-	let data = await API.getSchools();
+	let data = await API.getSchools(true);
 	res.header("Content-Type",'application/json');
 	res.send(JSON.stringify(data.filter(s => s.id == req.params.id), null, 4));
 });
