@@ -134,24 +134,23 @@ router.get('/teams', async (req, res) => {
 	res.send(JSON.stringify(data, null, 4));
 });
 
-router.get('/teams/all', async (req, res) => {
-	let data = await API.getTeams(true);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify(data, null, 4));
-});
-
 router.get('/schools', async (req, res) => {
 	let data = await API.getSchools();
 	res.header("Content-Type",'application/json');
 	res.send(JSON.stringify(data, null, 4));
 });
 
-router.get('/schools/all', async (req, res) => {
-	let data = await API.getSchools(true);
+router.get('/min/teams', async (req, res) => {
+	let data = await API.getTeams(true);
 	res.header("Content-Type",'application/json');
 	res.send(JSON.stringify(data, null, 4));
 });
 
+router.get('/min/schools', async (req, res) => {
+	let data = await API.getSchools(true);
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+});
 
 
 

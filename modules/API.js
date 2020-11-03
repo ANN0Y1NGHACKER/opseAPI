@@ -41,14 +41,14 @@ exports.getTeams = async (allinfo = false) => {
                 IGN: null
             } // TODO Add coaches to database
 
-            temp["players"] = [] // TODO Add players to database
+            temp["players"] = null // TODO Add players to database
         }
         else {
             temp["schoolID"] = teams[i].schoolID;
             temp["leagueID"] = teams[i].leagueID;
             temp["managerID"] = null; // TODO Add managers to database
             temp["coachID"] = null; // TODO Add coaches to database
-            temp["playerIDs"] = []; // TODO Add players to database
+            temp["playerIDs"] = null; // TODO Add players to database
         }
 
         res.push(temp)
@@ -80,16 +80,21 @@ exports.getSchools = async (allinfo = false) => {
 
         if (allinfo) {
             temp["teams"] = [];
-            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID)
+            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID);
             for (var j in schoolTeams) temp["teams"].push({
                 id: teams.filter(t => t.ID == schoolTeams[j].ID)[0].ID,
-                league: leagues.filter(l => l.ID == schoolTeams[j].leagueID)[0].title
+                league: leagues.filter(l => l.ID == schoolTeams[j].leagueID)[0].title,
+                manager: null,
+                coach: null,
+                players: null,
             });
+            if (temp["teams"].length == 0) temp["teams"] = null;
         }
         else {
             temp["teamIDs"] = [];
-            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID)
-            for (var j in schoolTeams) temp["teamIDs"].push(schoolTeams[j].ID)
+            let schoolTeams = teams.filter(t => t.schoolID == schools[i].ID);
+            for (var j in schoolTeams) temp["teamIDs"].push(schoolTeams[j].ID);
+            if (temp["teamIDs"].length == 0) temp["teamIDs"] = null;
         }
 
         res.push(temp)
