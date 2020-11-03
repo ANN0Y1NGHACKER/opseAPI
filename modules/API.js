@@ -102,3 +102,43 @@ exports.getSchools = async (allinfo = false) => {
     
     return res;
 }
+
+exports.getLeagues = async (allinfo = false) => {
+    let res = [];
+
+    let teams = await DB.getTeams();
+    let schools = await DB.getSchools();
+    let leagues = await DB.getLeagues();
+
+    for (var i in leagues) {
+        let temp = {
+            id: leagues[i].ID,
+            name: leagues[i].title,
+        }
+
+        if (allinfo) {
+            temp["teams"] = [];
+            let schoolTeams = teams.filter(d => d.leagueID == leagues[i].ID);
+            for (var j in schoolTeams) temp["teams"].push({
+                id: teams.filter(d => d.ID == schoolTeams[j].ID)[0].ID,
+                school: schools.filter(d => d.ID == schoolTeams[j].ID)[0].name,
+                teamName: schools.filter(d => d.ID == schoolTeams[j].ID)[0].teamName,
+                abbrev: schools.filter(d => d.ID == schoolTeams[j].ID)[0].abbrev,
+                manager: null,
+                coach: null,
+                players: null,
+            });
+            if (temp["teams"].length == 0) temp["teams"] = null;
+        }
+        else {
+            temp["teamIDs"] = [];
+            let schoolTeams = teams.filter(d => d.leagueID == leagues[i].ID);
+            for (var j in schoolTeams) temp["teamIDs"].push(schoolTeams[j].ID);
+            if (temp["teamIDs"].length == 0) temp["teamIDs"] = null;
+        }
+
+        res.push(temp)
+    }
+    
+    return res;
+}

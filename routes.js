@@ -135,6 +135,7 @@ router.get("/createImg-wide", async (req, res) => {
 
 router.get('/teams', async (req, res) => { sendJSON(res, await API.getTeams()) });
 router.get('/schools', async (req, res) => { sendJSON(res, await API.getSchools()) });
+router.get('/leagues', async (req, res) => { sendJSON(res, await API.getLeagues()) });
 
 router.get('/teams/:id', async (req, res) => {
 	let data = await API.getTeams(true);
