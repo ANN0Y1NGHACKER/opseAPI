@@ -11,5 +11,5 @@ app.use(express.static("public"));
 app.use(require("./routes"));
 
 server.listen(port, function () {
-	console.info('Server listening at port %d', port);
+	console.info(`Server listening at port ${port}`);
 });
