@@ -7,7 +7,11 @@ const urlparse = require('url-parse');
 
 router.get("/", (req, res) => {
 	res.send("WORKING")
-})
+});
+
+router.get("/test", (req, res) => {
+	res.send("WORKING")
+});
 
 router.get("/createImg", async (req, res) => {
 	const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
