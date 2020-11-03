@@ -11,12 +11,11 @@ router.get("/home", (req, res) => {
 	res.send("WORKING")
 });
 
-router.get("/test", (req, res) => {
-	res.send("TEST")
-});
+router.get("/test", (req, res) => {res.send("TEST")});
 
-router.get("/createImg", async (req, res) => {
-	console.log("Creating Image")
+router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
+
+router.get("/createImg-wide", async (req, res) => {
 	const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
 	const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
 	const line3 = await jimp.loadFont("./ImageGen/fonts/line3.fnt");
@@ -126,9 +125,7 @@ router.get("/createImg", async (req, res) => {
 		}
 		
 
-		data[0].write(`./public/imageGen.png`, () => {
-			res.sendFile(`${__dirname}/public/imageGen.png`)
-		});
+		data[0].write(`./public/imageGen.png`, () => {res.sendFile(`${__dirname}/public/imageGen.png`)});
 	});
 });
 
