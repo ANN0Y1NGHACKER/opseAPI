@@ -5,10 +5,12 @@ const router = express.Router();
 const jimp = require('jimp');
 const urlparse = require('url-parse');
 
+const API = require('./modules/API');
+
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
+router.get("/", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
 router.get("/index.php", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
-
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
 
 router.get("/createImg-wide", async (req, res) => {
@@ -124,6 +126,17 @@ router.get("/createImg-wide", async (req, res) => {
 		data[0].write(`./public/post.png`, () => {res.sendFile(`${__dirname}/public/post.png`)});
 	});
 });
+
+
+router.get('/teams', async (req, res) => {
+	let data = await API.getTeams();
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify(data, null, 4));
+});
+
+
+
+
 
 
 router.post("/git-pull", async (req, res) => {
