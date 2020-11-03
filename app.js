@@ -11,6 +11,4 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(require("./routes"));
 
-server.listen(port, () => {
-	console.info(`Server listening at port ${port}`);
-});
+server.listen(port, () => {console.info(`Server listening at port ${port}`)});
