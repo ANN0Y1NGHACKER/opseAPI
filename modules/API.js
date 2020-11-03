@@ -121,9 +121,9 @@ exports.getLeagues = async (allinfo = false) => {
             let schoolTeams = teams.filter(d => d.leagueID == leagues[i].ID);
             for (var j in schoolTeams) temp["teams"].push({
                 id: teams.filter(d => d.ID == schoolTeams[j].ID)[0].ID,
-                school: schools.filter(d => d.ID == schoolTeams[j].ID)[0].name,
-                teamName: schools.filter(d => d.ID == schoolTeams[j].ID)[0].teamName,
-                abbrev: schools.filter(d => d.ID == schoolTeams[j].ID)[0].abbrev,
+                school: schools.filter(d => d.ID == schoolTeams[j].schoolID)[0].name,
+                teamName: schools.filter(d => d.ID == schoolTeams[j].schoolID)[0].teamName,
+                abbrev: schools.filter(d => d.ID == schoolTeams[j].schoolID)[0].abbrev,
                 manager: null,
                 coach: null,
                 players: null,
