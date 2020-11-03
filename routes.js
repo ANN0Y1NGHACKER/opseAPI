@@ -6,7 +6,7 @@ const jimp = require('jimp');
 const urlparse = require('url-parse');
 
 router.get("/", (req, res) => {
-	res.send("WORKING")
+	res.send("WORKING TEST")
 });
 
 router.get("/test", (req, res) => {
