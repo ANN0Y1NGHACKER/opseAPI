@@ -131,15 +131,11 @@ router.get("/createImg", async (req, res) => {
 });
 
 
-router.patch("/git-pull", async (req, res) => {
-	if (req.headers.pass) {
-		if (req.headers.pass == "5524278") {
-			console.log("Pulling from git");
-			await exec('git pull origin main');
-			res.send("Server in sync with git");
-			console.log("Pulled from git");
-		}
-	}
+router.post("/git-pull", async (req, res) => {
+	console.log("Pulling from git");
+	await exec('git pull origin main');
+	res.send("Server in sync with git");
+	console.log("Pulled from git");
 });
 
 module.exports = router;
