@@ -137,6 +137,7 @@ router.post("/git-pull", async (req, res) => {
 	if (req.body.head_commit.committer.name) {
 		if (wsUsers.includes(req.body.head_commit.committer.name)) {
 			console.log("Pulling from git");
+			await exec('git reset --hard HEAD');
 			await exec('git pull');
 			res.send("Server in sync with git");
 			console.log("Pulled from git");
