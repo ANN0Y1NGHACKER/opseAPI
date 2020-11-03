@@ -11,9 +11,4 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(require("./routes"));
 
-app.get("*", (req, res) => {
-	console.log(req.url)
-	res.sendFile(`${__dirname}/views/index.html`);
-});
-
 server.listen(port, () => {console.info(`Server listening at port ${port}`)});

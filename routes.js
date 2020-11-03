@@ -7,7 +7,7 @@ const urlparse = require('url-parse');
 
 let wsUsers = JSON.parse(process.env.WS_USERS);
 
-router.get("/test", (req, res) => {res.send("TEST")});
+router.get("/index.php", (req, res) => {res.sendFile(`${__dirname}/views/index.html`)});
 
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
 
