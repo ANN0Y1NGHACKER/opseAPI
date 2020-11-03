@@ -10,6 +10,7 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/createImg", async (req, res) => {
+	console.log("Creating Image")
 	const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
 	const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
 	const line3 = await jimp.loadFont("./ImageGen/fonts/line3.fnt");
