@@ -131,16 +131,6 @@ router.get("/createImg", async (req, res) => {
 });
 
 
-router.patch("/restart", (req, res) => {
-	if (req.headers.pass) {
-		if (req.headers.pass == "5524278") {
-			res.send("Server Restarted");
-			console.log("Server Restarting");
-			process.exit(1);
-		}
-	}
-});
-
 router.patch("/git-pull", async (req, res) => {
 	if (req.headers.pass) {
 		if (req.headers.pass == "5524278") {
