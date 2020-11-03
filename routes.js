@@ -14,10 +14,9 @@ router.get("/test", (req, res) => {res.send("TEST")});
 router.get("/image-generator", (req, res) => {res.sendFile(`${__dirname}/ImageGen/index.html`)});
 
 router.get("/createImg-wide", async (req, res) => {
-	console.log("Making Image");
-	const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
-	const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
-	const line3 = await jimp.loadFont("./ImageGen/fonts/line3.fnt");
+	// const line1 = await jimp.loadFont("./ImageGen/fonts/line1.fnt");
+	// const line2 = await jimp.loadFont("./ImageGen/fonts/line2.fnt");
+	// const line3 = await jimp.loadFont("./ImageGen/fonts/line3.fnt");
 
 	const queryObject = urlparse(req.url,true).query;
 	let images = [];
@@ -65,26 +64,26 @@ router.get("/createImg-wide", async (req, res) => {
 
 		for (var i in queryObject) {
 			switch (i) {
-				case "line1":
-					data[0].print(line1, 0, 158, {
-						text: queryObject[i],
-						alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
-					}, 1920, 1080);
-					break;
+				// case "line1":
+				// 	data[0].print(line1, 0, 158, {
+				// 		text: queryObject[i],
+				// 		alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
+				// 	}, 1920, 1080);
+				// 	break;
 	
-				case "line2":
-					data[0].print(line2, 14, 880, {
-						text: queryObject[i],
-						alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
-					}, 1920, 1080);
-					break;
+				// case "line2":
+				// 	data[0].print(line2, 14, 880, {
+				// 		text: queryObject[i],
+				// 		alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
+				// 	}, 1920, 1080);
+				// 	break;
 			
-				case "line3":
-					data[0].print(line3, 20, 950, {
-						text: queryObject[i],
-						alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
-					}, 1920, 1080);
-					break;
+				// case "line3":
+				// 	data[0].print(line3, 20, 950, {
+				// 		text: queryObject[i],
+				// 		alignmentX: jimp.HORIZONTAL_ALIGN_CENTER
+				// 	}, 1920, 1080);
+				// 	break;
 
 				case "left":
 					let logoIMGl_wn = await jimp.read(`./ImageGen/logos/withName/${queryObject[i]}.png`).catch((e) => {});
@@ -124,7 +123,6 @@ router.get("/createImg-wide", async (req, res) => {
 		}
 		
 
-		console.log("Making Image");
 		data[0].write(`./public/imageGen.png`, () => {res.sendFile(`${__dirname}/public/imageGen.png`)});
 	});
 });
