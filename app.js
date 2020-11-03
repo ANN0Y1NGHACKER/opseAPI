@@ -1,4 +1,4 @@
-function main() {
+setTimeout(() => {
 	require('dotenv-flow').config();
 	const bodyParser = require('body-parser');
 	const express = require("express");
@@ -15,6 +15,4 @@ function main() {
 	server.listen(port, () => {
 		console.info(`Server listening at port ${port}`);
 	});
-};
-
-setTimeout(main(), 1000);
+}, 1000);
