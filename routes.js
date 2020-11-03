@@ -1,3 +1,5 @@
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const express = require("express");
 const router = express.Router();
 const jimp = require('jimp');
@@ -117,6 +119,27 @@ router.get("/createImg", async (req, res) => {
 			res.sendFile(`${__dirname}/ImageGen/score.png`)
 		});
 	});
+});
+
+router.patch("/restart", (req, res) => {
+	if (req.headers.pass) {
+		if (req.headers.pass == "5524278") {
+			res.send("Server Restarted");
+			console.log("Server Restarting");
+			process.exit(1);
+		}
+	}
+});
+
+router.patch("/git-pull", async (req, res) => {
+	if (req.headers.pass) {
+		if (req.headers.pass == "5524278") {
+			console.log("Pulling from git");
+			await exec('git pull');
+			res.send("Server in sync with git");
+			console.log("Pulled from git");
+		}
+	}
 });
 
 module.exports = router;
