@@ -10,7 +10,7 @@ router.get("/home", (req, res) => {
 });
 
 router.get("/test", (req, res) => {
-	res.send("WORKING")
+	res.send("TEST")
 });
 
 router.get("/createImg", async (req, res) => {
