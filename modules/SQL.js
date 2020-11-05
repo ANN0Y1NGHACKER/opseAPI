@@ -9,7 +9,10 @@ var db = mysql.createConnection({
 });
 db.connect();
 
-db.on("error", () => { db.connect() });
+db.on("error", () => {
+	// db.connect();
+	console.log("SQL DISCONNECTED")
+});
 
 exports.getTeams = async () => {
     return new Promise((res, err) => {
