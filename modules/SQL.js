@@ -65,3 +65,12 @@ exports.getLeagues = async () => {
 		});
 	});
 };
+
+exports.getPlayers = async () => {
+    return new Promise((res, err) => {
+		db.query(`SELECT * FROM players`, (error, results, fields) => {
+            if (error) return err(error);
+			return res(results);
+		});
+	});
+};
