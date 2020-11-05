@@ -11,7 +11,7 @@ const mysql = require('mysql');
 
 var db;
 
-function connectDatabase() {
+let connectDatabase = () => {
 	db = mysql.createConnection({
 		host     : process.env.DB_HOST,
 		port     : process.env.DB_PORT,
@@ -20,15 +20,15 @@ function connectDatabase() {
 		database : process.env.DB_NAME,
 	});
   
-	db.connect(function(err) {
-	  	if(err) {
+	db.connect(err => {
+	  	if (err) {
 			console.error('Error establishing connection... retrying', err);
 			setTimeout(connectDatabase, 2000);
-		}     
+		}
 		else connectionResets = 0;
 	});                            
 
-	db.on('error', function(err) {
+	db.on('error', err => {
 	  	connectionResets++;
 		if (connectionResets < 5) connectDatabase();	                      
 		else {
@@ -37,7 +37,6 @@ function connectDatabase() {
 		}
 	});
 }
-
 connectDatabase();
 
 exports.getTeams = async () => {
