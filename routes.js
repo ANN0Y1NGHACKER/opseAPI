@@ -171,6 +171,11 @@ router.get('/players/:id?.:min?', async (req, res) => {
 	else sendJSON(res, data);
 });
 
+router.post('/tourneycode', async (req, res) => {
+	let data = await API.tournamentCode("", "");
+	res.send(data);
+});
+
 
 
 router.post("/git-pull", async (req, res) => {
