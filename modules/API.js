@@ -1,4 +1,3 @@
-const request = require('request-promise');
 const DB = require('./SQL');
 
 exports.getTeams = async (allinfo = false) => {
@@ -210,20 +209,4 @@ exports.getPlayers = async (allinfo = false) => {
     }
     
     return res;
-}
-
-exports.tournamentCode = (meta, specType) => {
-    let code = "";
-
-    request.post("https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=1861658&api_key=RGAPI-e9413407-25ed-4445-9972-3f08c5b883a0", {
-        "mapType": "SUMMONERS_RIFT",
-        "metadata": "TEST",
-        "pickType": "TOURNAMENT_DRAFT",
-        "spectatorType": "LOBBYONLY",
-        "teamSize": 5
-    }).then(body => {
-        console.log(body);
-    })
-
-    return code;
 }

@@ -1,6 +1,7 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const express = require("express");
+const axios = require('axios');
 const router = express.Router();
 const jimp = require('jimp');
 const urlparse = require('url-parse');
@@ -171,9 +172,23 @@ router.get('/players/:id?.:min?', async (req, res) => {
 	else sendJSON(res, data);
 });
 
-router.post('/tourneycode', async (req, res) => {
-	let data = await API.tournamentCode("", "");
-	res.send(data);
+router.get('/tourneycode/:meta.:type?', async (req, res) => {
+	let requestData = {
+        "mapType": "SUMMONERS_RIFT",
+        "metadata": req.params.meta,
+        "pickType": "TOURNAMENT_DRAFT",
+        "spectatorType": "LOBBYONLY",
+        "teamSize": 5
+    }
+	if (req.params.type.toLowerCase() == "all") requestData.spectatorType = "ALL";
+
+	axios.post('https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=1861658&api_key=RGAPI-e9413407-25ed-4445-9972-3f08c5b883a0', requestData).then((body) => {
+        res.send(body.data[0]);
+    })
+    .catch((error) => {
+		console.error(error);
+		res.send(error);
+	})
 });
 
 
