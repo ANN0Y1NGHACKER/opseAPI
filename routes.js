@@ -1,3 +1,4 @@
+const config = global.CONFIG;
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const express = require("express");
@@ -8,7 +9,7 @@ const urlparse = require('url-parse');
 
 const API = require('./modules/API');
 
-let wsUsers = JSON.parse(process.env.WS_USERS);
+let wsUsers = JSON.parse(config.WS_USERS);
 
 let sendJSON = (res, data, filter=[]) => {
 	if (filter.length != 0) {

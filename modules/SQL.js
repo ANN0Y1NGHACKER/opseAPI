@@ -1,23 +1,15 @@
+const config = global.CONFIG;
 const mysql = require('mysql');
-
-// var db = mysql.createConnection({
-//     host     : process.env.DB_HOST,
-//     port     : process.env.DB_PORT,
-//     user     : process.env.DB_USER,
-//     password : process.env.DB_PASS,
-//     database : process.env.DB_NAME,
-// });
-// db.connect();
 
 var db;
 
 let connectDatabase = () => {
 	db = mysql.createConnection({
-		host     : process.env.DB_HOST,
-		port     : process.env.DB_PORT,
-		user     : process.env.DB_USER,
-		password : process.env.DB_PASS,
-		database : process.env.DB_NAME,
+		host     : config.DB_HOST,
+		port     : config.DB_PORT,
+		user     : config.DB_USER,
+		password : config.DB_PASS,
+		database : config.DB_NAME,
 	});
   
 	db.connect(err => {

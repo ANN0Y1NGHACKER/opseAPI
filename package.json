@@ -3,12 +3,14 @@
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js"
+        "start": "nodemon app.js",
+        "bot": "nodemon ./bot/index.js TRUE"
     },
     "dependencies": {
         "axios": "^0.21.0",
         "body-parser": "^1.19.0",
         "child_process": "^1.0.2",
+        "discord.js": "^12.4.1",
         "dotenv-flow": "^3.2.0",
         "express": "^4.17.1",
         "jimp": "^0.16.1",
