@@ -174,6 +174,14 @@ router.get('/players/:id?.:min?', async (req, res) => {
 	else sendJSON(res, data);
 });
 
+router.get('/standings/:id?.:min?', async (req, res) => {
+	let data = await API.getStandings(true);
+	if (req.params.min == "min") data = await API.getStandings();
+	if (req.params.id) sendJSON(res, data[req.params.id]);
+	else sendJSON(res, data);
+});
+
+
 router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	let requestData = {
         "mapType": "SUMMONERS_RIFT",

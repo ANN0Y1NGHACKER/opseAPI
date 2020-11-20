@@ -82,7 +82,6 @@ exports.getSchools = async (allinfo = false) => {
     let teams = await DB.getTeams();
     let schools = await DB.getSchools();
     let leagues = await DB.getLeagues();
-    let players = await DB.getPlayers();
 
     for (var i in schools) {
         let temp = {
@@ -129,7 +128,6 @@ exports.getLeagues = async (allinfo = false) => {
     let teams = await DB.getTeams();
     let schools = await DB.getSchools();
     let leagues = await DB.getLeagues();
-    let players = await DB.getPlayers();
 
     for (var i in leagues) {
         let temp = {
@@ -169,7 +167,6 @@ exports.getPlayers = async (allinfo = false) => {
 
     let teams = await DB.getTeams();
     let schools = await DB.getSchools();
-    let leagues = await DB.getLeagues();
     let players = await DB.getPlayers();
 
     for (var i in players) {
@@ -210,6 +207,47 @@ exports.getPlayers = async (allinfo = false) => {
     
     return res;
 }
+
+exports.getStandings = async (allinfo = false) => {
+    let res = {}, scores = [], temp1 = [], temp2 = {};
+
+    let teams = await DB.getTeams();
+    let leagues = await DB.getLeagues();
+    let schools = await DB.getSchools();
+    let schedule = await DB.getSchedule();
+
+    for (var i in leagues) res[leagues[i].ID] = [];
+
+
+    for (var i in schedule) if (schedule[i].Team1_score != null && schedule[i].Team2_score != null) {
+        if (schedule[i].Team1_score < schedule[i].Team2_score) temp1.push([schedule[i].teamID2, schedule[i].teamID1, schedule[i].leagueID]);
+        else temp1.push([schedule[i].teamID1, schedule[i].teamID2, schedule[i].leagueID]);
+    }
+
+    for (var i in temp1) {
+        if (!(temp1[i][0] in temp2)) temp2[temp1[i][0]] = { wins: 0, loss: 0, league: temp1[i][2] };
+        if (!(temp1[i][1] in temp2)) temp2[temp1[i][1]] = { wins: 0, loss: 0, league: temp1[i][2] };
+
+        temp2[temp1[i][0]].wins++;
+        temp2[temp1[i][1]].loss++;
+    }
+
+
+    for (var i in temp2) scores.push({ id: i, wins: temp2[i].wins, loss: temp2[i].loss, league: temp2[i].league })
+
+    scores.sort(function (a, b) { return parseFloat(b.loss) - parseFloat(a.loss) });
+    scores.sort(function (a, b) { return parseFloat(b.wins) - parseFloat(a.wins) });
+    scores.sort(function (a, b) { return parseFloat(a.league) - parseFloat(b.league) });
+
+    for (var i in scores) {
+        let data = { teamID: scores[i].id,  wins: scores[i].wins, loss: scores[i].loss };
+        if (allinfo) data['logo'] = schools.filter(s => s.ID == teams.filter(t => t.ID == data.teamID)[0].schoolID)[0].logo;
+        res[scores[i].league].push(data);
+    }
+
+    return res;
+}
+
 
 exports.checkPlayer = async name => {
     let players = await DB.getPlayers();
