@@ -67,6 +67,15 @@ exports.getPlayers = async () => {
 	});
 };
 
+exports.getSchedule = async () => {
+    return new Promise((res, err) => {
+		db.query(`SELECT * FROM schedule`, (error, results, fields) => {
+            if (error) return err(error);
+			return res(results);
+		});
+	});
+};
+
 exports.getGames = async () => {
     return new Promise((res, err) => {
 		db.query(`SELECT * FROM lol_games`, (error, results, fields) => {

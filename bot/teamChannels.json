@@ -1,14 +1,16 @@
 {
     "lol": [
-        {
-            "id": "204",
-            "name": "team1",
-            "channel": "779204927125585950"
-        },
-        {
-            "id": "206",
-            "name": "team2",
-            "channel": "779205025041612830"
-        }
+        { "id": "201", "channel": "745795157021949952", "name": "Carleton Ravens" },
+        { "id": "202", "channel": "746752282451771402", "name": "Conestoga Condors" },
+        { "id": "203", "channel": "746759802843037778", "name": "Fanshawe Falcons" },
+        { "id": "204", "channel": "746761390202683524", "name": "Queen's Gaels" },
+        { "id": "205", "channel": "746764876101451826", "name": "St. Clair Saints" },
+        { "id": "206", "channel": "746765624985780365", "name": "Trent Excalibur" },
+        { "id": "207", "channel": "755212319436439622", "name": "uOttawa Gee-Gees Esports" },
+        { "id": "208", "channel": "750066235441676310", "name": "University of Toronto Esports" },
+        { "id": "209", "channel": "746766412864815204", "name": "Waterloo Warriors" },
+        { "id": "210", "channel": "746767881139650571", "name": "Lancer Gaming" },
+        { "id": "211", "channel": "747953141391294567", "name": "Western Mustangs Esports" },
+        { "id": "212", "channel": "753346901704704010", "name": "York Lions" }
     ]
 }
