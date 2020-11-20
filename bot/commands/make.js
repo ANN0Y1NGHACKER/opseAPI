@@ -2,6 +2,9 @@ let prodraft = require('../modules/prodraft');
 
 exports.run = async (client, message, args) => {
     let user = message.author;
+
+    if (user.id != "220161488516546561") return;
+
     console.log(`[BOT] \n[BOT] > ${user.username} typed the 'make' command.`);
 
 //     let info = await prodraft.makeDraft("TEST1", "TEST2", "TEST3");

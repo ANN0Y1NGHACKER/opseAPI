@@ -241,7 +241,10 @@ exports.getStandings = async (allinfo = false) => {
 
     for (var i in scores) {
         let data = { teamID: scores[i].id,  wins: scores[i].wins, loss: scores[i].loss };
-        if (allinfo) data['logo'] = schools.filter(s => s.ID == teams.filter(t => t.ID == data.teamID)[0].schoolID)[0].logo;
+        if (allinfo) {
+            data['logo'] = schools.filter(s => s.ID == teams.filter(t => t.ID == data.teamID)[0].schoolID)[0].logo;
+            data['name'] = schools.filter(s => s.ID == teams.filter(t => t.ID == data.teamID)[0].schoolID)[0].teamName;
+        }
         res[scores[i].league].push(data);
     }
 
