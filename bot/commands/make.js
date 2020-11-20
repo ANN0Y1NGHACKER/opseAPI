@@ -12,5 +12,8 @@ exports.run = async (client, message, args) => {
 // **SPEC**: ${info.spec}
 //     `)
 
+    message.delete();
+    prodraft.getDraft("001", "002");
+
     console.log(`[BOT] > End of command entered by ${user.username}`);
 };

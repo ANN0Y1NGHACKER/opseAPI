@@ -46,11 +46,10 @@ if (active) {
 		switch(event.t){
 			case "MESSAGE_REACTION_REMOVE": {
 				const { d: data } = event;
-				const user = client.users.get(data.user_id);
-				const channel = client.channels.get(data.channel_id) || await user.createDM();
-				const message = await channel.fetchMessage(data.message_id);
-				const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-				const reaction = message.reactions.get(emojiKey);
+				const user = client.users.cache.get(data.user_id);
+				const channel = client.channels.cache.get(data.channel_id) || await user.createDM();
+				const message = await channel.messages.fetch(data.message_id);
+				const reaction = message.reactions.cache.get(data.emoji.id).emoji;
 		
 				client.emit('messageReactionRemove', reaction, user);
 				break;
