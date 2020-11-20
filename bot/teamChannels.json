@@ -1,5 +1,7 @@
 {
     "lol": [
+        { "id": "001", "channel": "779283959753998336", "name": "Team 1" },
+        { "id": "002", "channel": "779284025839452190", "name": "Team 2" },
         { "id": "201", "channel": "745795157021949952", "name": "Carleton Ravens" },
         { "id": "202", "channel": "746752282451771402", "name": "Conestoga Condors" },
         { "id": "203", "channel": "746759802843037778", "name": "Fanshawe Falcons" },
