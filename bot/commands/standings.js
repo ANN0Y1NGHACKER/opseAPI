@@ -1,7 +1,7 @@
 const request = require('request-promise');
 
-let sendEmbed = (channel, data) {
-    
+let sendEmbed = (channel, data) => {
+
 }
 
 exports.run = (client, message, args) => {
