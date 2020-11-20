@@ -46,9 +46,7 @@ exports.getDraft = async (winningTeam, losingTeam) => {
 
     var m1;
 
-    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while theyt a side.`).then(msg => {
-        m1 = msg;
-    });
+    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while theyt a side.`).then(msg => { m1 = msg });
 
     loseChannel.send(`Looks like you have finished your game. Since you lost, pick a side you want to play next game:`).then(async msg => {
         await msg.react("779217859589963786");
