@@ -66,3 +66,21 @@ exports.getPlayers = async () => {
 		});
 	});
 };
+
+exports.getGames = async () => {
+    return new Promise((res, err) => {
+		db.query(`SELECT * FROM lol_games`, (error, results, fields) => {
+            if (error) return err(error);
+			return res(results);
+		});
+	});
+};
+
+exports.recordGame = async (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) => {
+	return new Promise((res, err) => {
+		db.query(`INSERT into lol_games (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) VALUES ('${GameID}', '${MatchID}', '${StartTime}', '${Team1_ID}', '${Team2_ID}', '${WinningTeam_ID}', '${Description}', '${Tournament_Code}')`, (error, results, fields) => {
+            if (error) return err(error);
+			return res(results);
+		});
+	});
+}

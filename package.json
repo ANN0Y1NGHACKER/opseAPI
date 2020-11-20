@@ -3,8 +3,9 @@
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js",
-        "bot": "nodemon ./bot/index.js TRUE"
+        "start": "nodemon app.js ALL",
+        "server": "nodemon app.js",
+        "bot": "nodemon ./bot/index.js BOT"
     },
     "dependencies": {
         "axios": "^0.21.0",

@@ -1,7 +1,7 @@
 module.exports = async client => {
 	console.log(`[BOT]  \n[BOT] Logged in as ${client.user.tag}!`);
 
-	// client.user.setStatus('invisible');
+	client.user.setStatus('invisible');
 	// client.user.setActivity("temporary Commands", { type: "listening"});
 
 	var rMa = [

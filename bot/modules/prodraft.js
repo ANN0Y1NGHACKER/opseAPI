@@ -41,12 +41,14 @@ exports.getDraft = async (winningTeam, losingTeam) => {
     let winTeam = teamsInfo.lol.filter(t => t.id == winningTeam)[0];
     let loseTeam = teamsInfo.lol.filter(t => t.id == losingTeam)[0];
 
+    if (winTeam == null || loseTeam == null) return;
+
     let winChannel = bot.channels.cache.get(winTeam.channel);
     let loseChannel = bot.channels.cache.get(loseTeam.channel);
 
     var m1;
 
-    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while theyt a side.`).then(msg => { m1 = msg });
+    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while they a side.`).then(msg => { m1 = msg });
 
     loseChannel.send(`Looks like you have finished your game. Since you lost, pick a side you want to play next game:`).then(async msg => {
         await msg.react("779217859589963786");
@@ -105,4 +107,17 @@ Spec: ${prodraftInfo.spec}
         `);
 
     });
+}
+
+exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
+    let winTeam = teamsInfo.lol.filter(t => t.id == winningTeam)[0];
+    let loseTeam = teamsInfo.lol.filter(t => t.id == losingTeam)[0];
+
+    if (winTeam == null || loseTeam == null) return;
+
+    let winChannel = bot.channels.cache.get(winTeam.channel);
+    let loseChannel = bot.channels.cache.get(loseTeam.channel);
+
+    winChannel.send(`Congrats on winning your series against **${loseTeam.name}** with a score of ${finalScore}.`);
+    loseChannel.send(`You fought well against **${winTeam.name}**. Better luck next time.`);
 }

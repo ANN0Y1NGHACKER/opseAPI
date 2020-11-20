@@ -9,7 +9,7 @@ const server = require('http').createServer(app);
 
 var port = config.PORT || 3000;
 
-require('./bot/index');
+if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/index');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());

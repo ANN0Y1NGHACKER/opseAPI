@@ -5,6 +5,9 @@ exports.init = () => {
         "BOT_TOKEN": process.env.BOT_TOKEN,
         "BOT_PREFIX": process.env.BOT_PREFIX,
 
+        "RIOT_ID": process.env.RIOT_ID,
+        "RIOT_API": process.env.RIOT_API,
+
         "DB_PORT": process.env.DB_PORT,
         "DB_HOST": process.env.DB_HOST,
         "DB_NAME": process.env.DB_NAME,

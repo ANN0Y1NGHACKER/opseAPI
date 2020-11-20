@@ -1,7 +1,7 @@
 const active = true;
 
 let config = global.CONFIG;
-if (process.argv[2]) {
+if (process.argv[2]) if (process.argv[2] == "BOT") {
     require('dotenv-flow').config();
     config = require('../config').init();
 }

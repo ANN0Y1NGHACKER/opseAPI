@@ -8,6 +8,7 @@ const jimp = require('jimp');
 const urlparse = require('url-parse');
 
 const API = require('./modules/API');
+const prodraft = require('./bot/modules/prodraft');
 
 let wsUsers = JSON.parse(config.WS_USERS);
 
@@ -183,7 +184,7 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	}
 	if (req.params.type) if (req.params.type.toLowerCase() == "all") requestData.spectatorType = "ALL";
 
-	axios.post('https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=1861658&api_key=RGAPI-e9413407-25ed-4445-9972-3f08c5b883a0', requestData).then((body) => {
+	axios.post(`https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=${config.RIOT_ID}&api_key=${config.RIOT_API}`, requestData).then((body) => {
         res.send(body.data[0]);
     })
     .catch((error) => {
@@ -193,6 +194,51 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 });
 
 
+router.post('/lolMatchResult', async (req, res) => {
+	let finalmeta = {
+		team1_ID: "",
+		team2_ID: "",
+		description:""
+	}
+	let body = req.body;
+	let meta = body.metaData.split(" ");
+	let key = body.shortCode;
+
+	finalmeta.team1_ID = meta[0];
+	meta.shift();
+	finalmeta.team2_ID = meta[0];
+	meta.shift();
+	finalmeta.matchID = meta[0];
+	meta.shift();
+	finalmeta.bo = meta[0];
+	meta.shift();
+	finalmeta.description = meta.join(" ");
+	body.metaData = finalmeta;
+
+	let winning_team = "";
+	
+	for (var i in body.winningTeam) {
+		let found = await API.checkPlayer(body.winningTeam[i].summonerName);
+		if (found[0]) {
+			winning_team = found[1];
+			break;
+		}
+	}
+	
+	body.metaData["win_ID"] = winning_team;
+
+	let isOver = await API.saveGame(body);
+	if (!isOver[0]) {
+		if (body.metaData.win_ID == body.metaData.team1_ID) prodraft.getDraft(body.metaData.team1_ID, body.metaData.team2_ID);
+		else if (body.metaData.win_ID == body.metaData.team2_ID) prodraft.getDraft(body.metaData.team2_ID, body.metaData.team1_ID);
+	}
+	else {
+		if (body.metaData.win_ID == body.metaData.team1_ID) prodraft.finalSend(body.metaData.team1_ID, body.metaData.team2_ID, `${isOver[1][body.metaData.team1_ID]} - ${isOver[1][body.metaData.team2_ID]}`);
+		else if (body.metaData.win_ID == body.metaData.team2_ID) prodraft.finalSend(body.metaData.team2_ID, body.metaData.team1_ID, `${isOver[1][body.metaData.team2_ID]} - ${isOver[1][body.metaData.team1_ID]}`);
+	}
+
+	res.send("LOGGED!!!");
+});
 
 router.post("/git-pull", async (req, res) => {
 	if (req.body.head_commit.committer.name) {
