@@ -46,7 +46,7 @@ exports.getDraft = async (winningTeam, losingTeam) => {
 
     var m1;
 
-    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while they select a side.`).then(msg => {
+    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while theyt a side.`).then(msg => {
         m1 = msg;
     });
 
@@ -101,7 +101,8 @@ Spec: ${prodraftInfo.spec}
 You have chosen *${reaction}* side.
 
 Here are your prodraft links. Finish them ASAP and wait until \`OPSE Admin\` or \`OPSE Replay\` tell you to start in the lobby.
-n: ${prodraftInfo.lose}
+
+Main: ${prodraftInfo.lose}
 Spec: ${prodraftInfo.spec}
         `);
 
