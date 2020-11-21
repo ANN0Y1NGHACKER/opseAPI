@@ -1,7 +1,7 @@
 const opseAPI = require('../../modules/API');
 const Discord = require('discord.js');
 
-let sendEmbed = (channel, data, title, logo) => {
+let sendEmbed = async (channel, data, title, logo) => {
     const icons = {
         hs_icon: {
             attach: new Discord.MessageAttachment(`./bot/assets/hs_icon.png`),
@@ -30,6 +30,9 @@ let sendEmbed = (channel, data, title, logo) => {
             "url": icons[logo].url
         }
     }
+
+    await data.sort(function (a, b) { return parseFloat(b.loss) - parseFloat(a.loss) });
+    await data.sort(function (a, b) { return parseFloat(b.wins) - parseFloat(a.wins) });
     
     for (var i in data) {
         n = parseInt(i) + 1;
