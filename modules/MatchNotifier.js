@@ -17,13 +17,13 @@ schedule.scheduleJob('00 * * * * *', async () => {
         // gTime.setHours(gTime.getHours() + 2);
         gTime.setMinutes(gTime.getMinutes() - 1);
 
-        if (
-            gTime.getFullYear() == cTime.getFullYear() &&
-            gTime.getMonth() == cTime.getMonth() &&
-            gTime.getDate() == cTime.getDate() &&
-            gTime.getHours() == cTime.getHours() &&
-            gTime.getMinutes() == cTime.getMinutes() + 1
-        ) gamesToNotify.push(games[i]);
+        // if (
+        //     gTime.getFullYear() == cTime.getFullYear() &&
+        //     gTime.getMonth() == cTime.getMonth() &&
+        //     gTime.getDate() == cTime.getDate() &&
+        //     gTime.getHours() == cTime.getHours() &&
+        //     gTime.getMinutes() == cTime.getMinutes() + 1
+        // ) gamesToNotify.push(games[i]);
 
         console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
     }
