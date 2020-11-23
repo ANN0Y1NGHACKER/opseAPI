@@ -3,7 +3,7 @@
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {
-        "start": "npm i && nodemon app.js ALL",
+        "start": "nodemon app.js ALL",
         "server": "nodemon app.js",
         "bot": "nodemon ./bot/index.js BOT"
     },
