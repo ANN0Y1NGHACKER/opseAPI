@@ -15,7 +15,7 @@ schedule.scheduleJob('00 * * * * *', async () => {
         let gTime = new Date(games[i].date);
         gTime.setSeconds(0,0);
         // gTime.setHours(gTime.getHours() + 2);
-        gTime.setMinutes(gTime.getMinutes() - 1);
+        // gTime.setMinutes(gTime.getMinutes() - 1);
 
         // if (
         //     gTime.getFullYear() == cTime.getFullYear() &&
