@@ -13,7 +13,6 @@ schedule.scheduleJob('00 * * * * *', async () => {
 
     for (var i in games) {
         let gTime = new Date(games[i].date);
-        gTime.setSeconds(0,0);
         // gTime.setHours(gTime.getHours() + 2);
         // gTime.setMinutes(gTime.getMinutes() - 1);
 
@@ -25,7 +24,8 @@ schedule.scheduleJob('00 * * * * *', async () => {
         //     gTime.getMinutes() == cTime.getMinutes() + 1
         // ) gamesToNotify.push(games[i]);
 
-        console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
+        // console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
+        console.log(gTime.getTime() == cTime.getTime())
     }
 
     for (var i in gamesToNotify) {
