@@ -17,12 +17,12 @@ schedule.scheduleJob('00 * * * * *', async () => {
         // gTime.setHours(gTime.getHours() - 2);
         gTime.setMinutes(gTime.getMinutes() - 2);
 
-        // if (gTime == cTime) gamesToNotify.push(games[i]);
+        if (gTime.getTime() == cTime.getTime()) gamesToNotify.push(games[i]);
 
         // console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
-        console.log(`${gTime.toString()} - ${cTime.toString()}`)
+        // console.log(`${gTime.toString()} - ${cTime.toString()}`)
 
-        console.log(gTime.getTime() == cTime.getTime())
+        // console.log(gTime.getTime() == cTime.getTime())
     }
 
     for (var i in gamesToNotify) {
