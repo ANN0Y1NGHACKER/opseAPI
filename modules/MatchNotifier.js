@@ -25,8 +25,8 @@ schedule.scheduleJob('00 * * * * *', async () => {
         let team1 = teamChannels.filter(t => t.id == gamesToNotify[i].teamID1)[0];
         let team2 = teamChannels.filter(t => t.id == gamesToNotify[i].teamID2)[0];
 
-        discord.sendMessage(team1.channel, `You have a game against ${team2.name} in 1 minute.`);
-        discord.sendMessage(team2.channel, `You have a game against ${team1.name} in 1 minute.`);
+        discord.sendMessage(team1.channel, `You have a game against **${team2.name}** in 1 minute.`);
+        discord.sendMessage(team2.channel, `You have a game against **${team1.name}** in 1 minute.`);
     }
 
     if (gamesToNotify.length > 0) console.log(`[MATCH NOTIFIER] Notified ${gamesToNotify.length} games.`);
