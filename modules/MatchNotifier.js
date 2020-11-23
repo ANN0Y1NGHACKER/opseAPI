@@ -13,11 +13,11 @@ schedule.scheduleJob('00 * * * * *', async () => {
     for (var i in games) {
         let gTime = new Date(games[i].date);
         if (
-            gTime.getFullYear() == cTime.getFullYear() &&
-            gTime.getMonth() == cTime.getMonth() &&
-            gTime.getDate() == cTime.getDate() &&
-            gTime.getHours() == cTime.getHours() - 5 &&
-            gTime.getMinutes() == cTime.getMinutes() + 1
+            gTime.getUTCFullYear() == cTime.getUTCFullYear() &&
+            gTime.getUTCMonth() == cTime.getUTCMonth() &&
+            gTime.getUTCDate() == cTime.getUTCDate() &&
+            gTime.getUTCHours() == cTime.getUTCHours() &&
+            gTime.getUTCMinutes() == cTime.getUTCMinutes() + 1
         ) gamesToNotify.push(games[i]);
     }
 
