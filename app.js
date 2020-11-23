@@ -15,8 +15,6 @@ app.use(express.static("public"));
 app.use(require("./routes"));
 
 server.listen(port, () => {
-    let cTime = new Date();
-    console.log(cTime.toString())
     console.info(`[SERVER] Server listening on port ${port}`)
     if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
 
