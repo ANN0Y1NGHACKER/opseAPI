@@ -22,7 +22,7 @@ schedule.scheduleJob('00 * * * * *', async () => {
         // console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
         console.log(`${gTime.toString()} - ${cTime.toString()}`)
 
-        // console.log(gTime.getTime() == cTime.getTime())
+        console.log(gTime.getTime() == cTime.getTime())
     }
 
     for (var i in gamesToNotify) {
