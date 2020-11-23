@@ -16,7 +16,7 @@ schedule.scheduleJob('00 * * * * *', async () => {
             gTime.getUTCFullYear() == cTime.getUTCFullYear() &&
             gTime.getUTCMonth() == cTime.getUTCMonth() &&
             gTime.getUTCDate() == cTime.getUTCDate() &&
-            gTime.getUTCHours() == cTime.getUTCHours() &&
+            gTime.getUTCHours() == cTime.getUTCHours() - 5 &&
             gTime.getUTCMinutes() == cTime.getUTCMinutes() + 1
         ) gamesToNotify.push(games[i]);
     }
