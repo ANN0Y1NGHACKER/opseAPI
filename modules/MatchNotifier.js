@@ -8,6 +8,7 @@ schedule.scheduleJob('00 * * * * *', async () => {
     let games = await DB.getSchedule();
     let cTime = new Date();
     cTime.setSeconds(0,0);
+    cTime.setHours(cTime.getHours() - 5);
 
     let gamesToNotify = [];
 
