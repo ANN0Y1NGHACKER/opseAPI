@@ -25,7 +25,8 @@ schedule.scheduleJob('00 * * * * *', async () => {
         // ) gamesToNotify.push(games[i]);
 
         // console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
-        console.log(gTime.getTime() == cTime.getTime())
+        console.log(`${gTime.getDate()}:${gTime.getMonth()}:${gTime.getFullYear()} ${gTime.getHours()}:${gTime.getMinutes()} - ${cTime.getDate()}:${cTime.getMonth()}:${cTime.getFullYear()} ${cTime.getHours()}:${cTime.getMinutes()}`)
+        // console.log(gTime.getTime() == cTime.getTime())
     }
 
     for (var i in gamesToNotify) {
