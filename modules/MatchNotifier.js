@@ -16,7 +16,7 @@ schedule.scheduleJob('00 * * * * *', async () => {
             gTime.getFullYear() == cTime.getFullYear() &&
             gTime.getMonth() == cTime.getMonth() &&
             gTime.getDate() == cTime.getDate() &&
-            gTime.getHours() == cTime.getHours() &&
+            gTime.getHours() == cTime.getHours() - 5 &&
             gTime.getMinutes() == cTime.getMinutes() + 1
         ) gamesToNotify.push(games[i]);
     }
