@@ -19,6 +19,8 @@ schedule.scheduleJob('00 * * * * *', async () => {
             gTime.getHours() == cTime.getHours() &&
             gTime.getMinutes() == cTime.getMinutes() + 1
         ) gamesToNotify.push(games[i]);
+
+        console.log(gTime.getHours() == (cTime.getHours()-5))
     }
 
     for (var i in gamesToNotify) {
