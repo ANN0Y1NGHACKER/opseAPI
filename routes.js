@@ -210,15 +210,12 @@ router.post('/lolMatchResult', async (req, res) => {
 	}
 	let body = req.body;
 	let meta = body.metaData.split(" ");
-	let key = body.shortCode;
 
 	finalmeta.team1_ID = meta[0];
 	meta.shift();
 	finalmeta.team2_ID = meta[0];
 	meta.shift();
 	finalmeta.matchID = meta[0];
-	meta.shift();
-	finalmeta.bo = meta[0];
 	meta.shift();
 	finalmeta.description = meta.join(" ");
 	body.metaData = finalmeta;

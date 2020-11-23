@@ -38,8 +38,8 @@ let awaitReaction = async (msg, filter) => {
 }
 
 exports.getDraft = async (winningTeam, losingTeam) => {
-    let winTeam = teamsInfo.lol.filter(t => t.id == winningTeam)[0];
-    let loseTeam = teamsInfo.lol.filter(t => t.id == losingTeam)[0];
+    let winTeam = teamsInfo.filter(t => t.id == winningTeam)[0];
+    let loseTeam = teamsInfo.filter(t => t.id == losingTeam)[0];
 
     if (winTeam == null || loseTeam == null) return;
 
@@ -110,8 +110,8 @@ Spec: ${prodraftInfo.spec}
 }
 
 exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
-    let winTeam = teamsInfo.lol.filter(t => t.id == winningTeam)[0];
-    let loseTeam = teamsInfo.lol.filter(t => t.id == losingTeam)[0];
+    let winTeam = teamsInfo.filter(t => t.id == winningTeam)[0];
+    let loseTeam = teamsInfo.filter(t => t.id == losingTeam)[0];
 
     if (winTeam == null || loseTeam == null) return;
 

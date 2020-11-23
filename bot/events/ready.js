@@ -1,11 +1,11 @@
 module.exports = async client => {
-	console.log(`[BOT]  \n[BOT] Logged in as ${client.user.tag}!`);
+	console.log(`[BOT] \n[BOT] Logged in as ${client.user.tag}!`);
 
 	client.user.setPresence({
         status: "invisible",
         // game: {
-        //     name: "!help",
-        //     type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+        //     name: "ANN0Y1NGHACKER code me",
+        //     type: "WATCHING" // PLAYING, WATCHING, LISTENING, STREAMING,
         // }
     });
 

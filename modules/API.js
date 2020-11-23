@@ -272,7 +272,8 @@ exports.saveGame = async body => {
 
     for (var i in fGames) scores[fGames[i].WinningTeam_ID]++;
 
-    if (body.metaData.bo == 3 && (scores[body.metaData.team1_ID] == 2 || scores[body.metaData.team2_ID] == 2)) return [true, scores];
-    if (body.metaData.bo == 5 && (scores[body.metaData.team1_ID] > 2 || scores[body.metaData.team2_ID] > 2)) return [true, scores];
+    if (scores[body.metaData.team1_ID] == 2 || scores[body.metaData.team2_ID] == 2) return [true, scores];
+    // if (scores[body.metaData.team1_ID] > 2 || scores[body.metaData.team2_ID] > 2) return [true, scores];
+
     return [false, scores];
 }

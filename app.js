@@ -9,11 +9,14 @@ const server = require('http').createServer(app);
 
 var port = config.PORT || 3000;
 
-if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/index');
-
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(require("./routes"));
 
-server.listen(port, () => {console.info(`[API] Server listening on port ${port}`)});
+server.listen(port, () => {
+    console.info(`[SERVER] Server listening on port ${port}`)
+    if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
+
+    require('./modules/MatchNotifier');
+});
