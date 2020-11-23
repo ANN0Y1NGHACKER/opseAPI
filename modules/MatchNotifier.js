@@ -18,11 +18,6 @@ schedule.scheduleJob('00 * * * * *', async () => {
         gTime.setMinutes(gTime.getMinutes() - 2);
 
         if (gTime.getTime() == cTime.getTime()) gamesToNotify.push(games[i]);
-
-        // console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
-        // console.log(`${gTime.toString()} - ${cTime.toString()}`)
-
-        // console.log(gTime.getTime() == cTime.getTime())
     }
 
     for (var i in gamesToNotify) {
