@@ -7,11 +7,16 @@ const teamChannels = require('../bot/teamChannels.json');
 schedule.scheduleJob('00 * * * * *', async () => {
     let games = await DB.getSchedule();
     let cTime = new Date();
+    cTime.setSeconds(0,0);
 
     let gamesToNotify = [];
 
     for (var i in games) {
         let gTime = new Date(games[i].date);
+        gTime.setSeconds(0,0);
+        // gTime.setHours(gTime.getHours() + 2);
+        gTime.setMinutes(gTime.getMinutes() - 1);
+
         if (
             gTime.getFullYear() == cTime.getFullYear() &&
             gTime.getMonth() == cTime.getMonth() &&
@@ -19,6 +24,8 @@ schedule.scheduleJob('00 * * * * *', async () => {
             gTime.getHours() == cTime.getHours() &&
             gTime.getMinutes() == cTime.getMinutes() + 1
         ) gamesToNotify.push(games[i]);
+
+        console.log(`${gTime.getTime()} - ${cTime.getTime()}`)
     }
 
     for (var i in gamesToNotify) {
