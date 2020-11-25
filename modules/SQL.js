@@ -85,7 +85,16 @@ exports.getGames = async () => {
 	});
 };
 
-exports.recordGame = async (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) => {
+exports.recordGame = async (id, score1, score2) => {
+	return new Promise((res, err) => {
+		db.query(`UPDATE schedule SET Team1_score = '${score1}', Team2_score = '${score2}' WHERE (ID = '${id}')`, (error, results, fields) => {
+            if (error) return err(error);
+			return res(results);
+		});
+	});
+}
+
+exports.recordLoLGame = async (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) => {
 	return new Promise((res, err) => {
 		db.query(`INSERT into lol_games (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) VALUES ('${GameID}', '${MatchID}', '${StartTime}', '${Team1_ID}', '${Team2_ID}', '${WinningTeam_ID}', '${Description}', '${Tournament_Code}')`, (error, results, fields) => {
             if (error) return err(error);

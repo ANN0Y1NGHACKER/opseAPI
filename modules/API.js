@@ -261,7 +261,7 @@ exports.checkPlayer = async name => {
 }
 
 exports.saveGame = async body => {
-    await DB.recordGame(body.gameId, body.metaData.matchID, body.startTime, body.metaData.team1_ID, body.metaData.team2_ID, body.metaData.win_ID, body.metaData.description, body.shortCode);
+    await DB.recordLoLGame(body.gameId, body.metaData.matchID, body.startTime, body.metaData.team1_ID, body.metaData.team2_ID, body.metaData.win_ID, body.metaData.description, body.shortCode);
 
     let games = await DB.getGames();
     let fGames = games.filter(g => g.MatchID == body.metaData.matchID);
@@ -272,6 +272,7 @@ exports.saveGame = async body => {
 
     for (var i in fGames) scores[fGames[i].WinningTeam_ID]++;
 
+    await DB.recordGame(body.metaData.matchID, scores[body.metaData.team1_ID], scores[body.metaData.team2_ID])
     if (scores[body.metaData.team1_ID] == 2 || scores[body.metaData.team2_ID] == 2) return [true, scores];
     // if (scores[body.metaData.team1_ID] > 2 || scores[body.metaData.team2_ID] > 2) return [true, scores];
 
