@@ -37,7 +37,7 @@ let awaitReaction = async (msg, filter) => {
     return reac;
 }
 
-exports.getDraft = async (winningTeam, losingTeam) => {
+exports.sendDraft = async (winningTeam, losingTeam) => {
     let winTeam = teamsInfo.filter(t => t.id == winningTeam)[0];
     let loseTeam = teamsInfo.filter(t => t.id == losingTeam)[0];
 

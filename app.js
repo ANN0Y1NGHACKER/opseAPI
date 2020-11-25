@@ -2,6 +2,8 @@ require('dotenv-flow').config();
 const config = require('./config').init();
 global.CONFIG = config;
 
+if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
+
 const bodyParser = require('body-parser');
 const express = require("express");
 const app = express();
@@ -16,7 +18,6 @@ app.use(require("./routes"));
 
 server.listen(port, () => {
     console.info(`[SERVER] Server listening on port ${port}`)
-    if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
 
     // require('./modules/MatchNotifier');
 });

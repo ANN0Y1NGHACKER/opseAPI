@@ -16,7 +16,10 @@ exports.run = async (client, message, args) => {
 //     `)
 
     message.delete();
-    prodraft.getDraft("001", "002");
+    // prodraft.makeDraft("001", "002");
+
+    let date = new Date();
+    console.log(`${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)} ${date.getDate()}, ${date.getFullYear()}`)
 
     console.log(`[BOT] > End of command entered by ${user.username}`);
 };
