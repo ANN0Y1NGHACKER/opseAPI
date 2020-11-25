@@ -142,7 +142,10 @@ router.get("/createImg-wide", async (req, res) => {
 		}
 		
 
-		data[0].write(`./public/post.png`, () => {res.sendFile(`${__dirname}/public/post.png`)});
+		data[0].write(`./public/post.png`, () => {
+			if ("download" in queryObject) if (queryObject["download"] == "true") res.download(`${__dirname}/public/post.png`);
+			else res.sendFile(`${__dirname}/public/post.png`);
+		});
 	});
 });
 
