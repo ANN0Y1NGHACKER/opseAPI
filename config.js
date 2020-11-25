@@ -8,6 +8,9 @@ exports.init = () => {
         "RIOT_ID": process.env.RIOT_ID,
         "RIOT_API": process.env.RIOT_API,
 
+        "WEBHOOK_ID": process.env.WEBHOOK_ID,
+        "WEBHOOK_TOKEN": process.env.WEBHOOK_TOKEN,
+
         "DB_PORT": process.env.DB_PORT,
         "DB_HOST": process.env.DB_HOST,
         "DB_NAME": process.env.DB_NAME,
