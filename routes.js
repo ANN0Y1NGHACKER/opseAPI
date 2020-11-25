@@ -242,12 +242,12 @@ router.post('/lolMatchResult', async (req, res) => {
 	let isOver = await API.saveGame(body);
 	let date = new Date();
 	if (!isOver[0]) {
-    	webhookClient.send(`­\n**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&crown=true&left=${teamChannels.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamChannels.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`);
+    	webhookClient.send(`**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&left=${teamChannels.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamChannels.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`);
 		// if (body.metaData.win_ID == body.metaData.team1_ID) prodraft.sendDraft(body.metaData.team1_ID, body.metaData.team2_ID);
 		// else if (body.metaData.win_ID == body.metaData.team2_ID) prodraft.sendDraft(body.metaData.team2_ID, body.metaData.team1_ID);
 	}
 	else {
-    	webhookClient.send(`­\n**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&crown=true&left=${teamChannels.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamChannels.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`);
+    	webhookClient.send(`**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&crown=true&left=${teamChannels.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamChannels.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`);
 		// if (body.metaData.win_ID == body.metaData.team1_ID) prodraft.finalSend(body.metaData.team1_ID, body.metaData.team2_ID, `${isOver[1][body.metaData.team1_ID]} - ${isOver[1][body.metaData.team2_ID]}`);
 		// else if (body.metaData.win_ID == body.metaData.team2_ID) prodraft.finalSend(body.metaData.team2_ID, body.metaData.team1_ID, `${isOver[1][body.metaData.team2_ID]} - ${isOver[1][body.metaData.team1_ID]}`);
 	}
