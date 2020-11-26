@@ -50,7 +50,7 @@ exports.firstDraft = async (winningTeam, losingTeam) => {
 
     var m1;
 
-    winChannel.send(`**${loseTeam.name}** is selecting a side. Please wait while they select a side.`).then(msg => { m1 = msg });
+    winChannel.send(`${loseTeam.emoji} **${loseTeam.name}** is selecting a side. Please wait while they select a side.`).then(msg => { m1 = msg });
 
     loseChannel.send(`Please select the side you want to play:`).then(async msg => {
         await msg.react("779217859589963786");
@@ -91,7 +91,7 @@ exports.firstDraft = async (winningTeam, losingTeam) => {
         }
 
         winChannel.send(`
-**${loseTeam.name}** has chosen *${reaction}* side.
+${loseTeam.emoji} **${loseTeam.name}** has chosen *${reaction}* side.
 
 Here are your prodraft links. Finish them ASAP and wait until \`OPSE Admin\` or \`OPSE Replay\` tell you to start in the lobby.
 
@@ -122,7 +122,7 @@ exports.sendDraft = async (winningTeam, losingTeam) => {
 
     var m1;
 
-    winChannel.send(`Congrats on winning against **${loseTeam.name}**. Please wait while they choose a side.`).then(msg => { m1 = msg });
+    winChannel.send(`Congrats on winning against ${loseTeam.emoji} **${loseTeam.name}**. Please wait while they choose a side.`).then(msg => { m1 = msg });
 
     loseChannel.send(`Looks like you have finished your game. Since you lost, pick the side you want to play next game:`).then(async msg => {
         await msg.react("779217859589963786");
@@ -192,6 +192,6 @@ exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
     let winChannel = bot.channels.cache.get(winTeam.channel);
     let loseChannel = bot.channels.cache.get(loseTeam.channel);
 
-    winChannel.send(`Congrats on winning your series against **${loseTeam.name}** with a score of ${finalScore}.`);
-    loseChannel.send(`You fought well against **${winTeam.name}**. Better luck next time.`);
+    // winChannel.send(`Congrats on winning your series against **${loseTeam.name}** with a score of ${finalScore}.`);
+    // loseChannel.send(`You fought well against **${winTeam.name}**. Better luck next time.`);
 }
