@@ -1,5 +1,8 @@
+const logger = require('../../modules/log');
+
 module.exports = async client => {
-	console.log(`[BOT] \n[BOT] Logged in as ${client.user.tag}!`);
+	logger.bot(` `);
+	logger.bot(`Logged in as ${client.user.tag}!`);
 
 	client.user.setPresence({
         status: "invisible",
@@ -16,7 +19,7 @@ module.exports = async client => {
 	for (var i in rMa) {
 		await client.channels.get(rMa[i][0]).fetchMessage(rMa[i][1]);
 		if (client.channels.get(rMa[i][0]).messages.has(rMa[i][1])) {
-			console.log(`[BOT] Message ${parseInt(i)+1} Cached!`);
+			logger.bot(`Message ${parseInt(i)+1} Cached!`);
 		}
 	}
 };

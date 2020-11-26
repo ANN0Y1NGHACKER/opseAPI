@@ -12,6 +12,7 @@ const Discord = require('discord.js');
 const prodraft = require('./bot/modules/prodraft');
 const bot = global.DISCORD_BOT;
 const teamChannels = require('./bot/teamChannels.json');
+const logger = require('./modules/log');
 
 const webhookClient = new Discord.WebhookClient(config.WEBHOOK_ID, config.WEBHOOK_TOKEN);
 

@@ -4,6 +4,7 @@ if (process.argv[2]) if (process.argv[2] == "BOT") {
     config = require('../config').init();
 }
 
+const logger = require('../modules/log');
 const Discord = require('discord.js');
 const fs = require('fs');
 
@@ -11,18 +12,19 @@ const fs = require('fs');
 const client = new Discord.Client();
 global.DISCORD_BOT = client;
 
-console.log(`[BOT] Loading Commands and events:`)
+logger.bot(`Loading Commands and events:`)
 client.commands = {};
 
 // Getting Events
 fs.readdir(`${__dirname}/events/`, async (err, files) => {
 	if (err) return console.error;
-	console.log('[BOT] \n[BOT]   • Events:')
+	logger.bot(' ');
+	logger.bot('  • Events:')
 	files.forEach(file => {
 		if (!file.endsWith('.js')) return;
 		const evt = require(`${__dirname}/events/${file}`);
 		let evtName = file.split('.')[0];
-		console.log(`[BOT]     - Loaded → ${evtName}`);
+		logger.bot(`    - Loaded → ${evtName}`);
 		client.on(evtName, evt.bind(null, client))
 	});
 });
@@ -30,12 +32,12 @@ fs.readdir(`${__dirname}/events/`, async (err, files) => {
 // Getting Commands
 fs.readdir(`${__dirname}/commands/`, async (err, files) => {
 	if (err) return console.error;
-	console.log('[BOT] \n[BOT]   • Commands:')
+	logger.bot('  • Commands:')
 	files.forEach(file => {
 		if (!file.endsWith('.js')) return;
 		let props = require(`${__dirname}/commands/${file}`);
 		let cmdName = file.split('.')[0];
-		console.log(`[BOT]     - Loaded → ${cmdName}`);
+		logger.bot(`    - Loaded → ${cmdName}`);
 		client.commands[cmdName] = props;
 	});
 });
