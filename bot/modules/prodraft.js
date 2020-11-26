@@ -194,6 +194,7 @@ exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
     let winChannel = bot.channels.cache.get(winTeam.channel);
     let loseChannel = bot.channels.cache.get(loseTeam.channel);
 
+    bot.channels.cache.get("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a score of ${finalScore}.`)
     // winChannel.send(`Congrats on winning your series against **${loseTeam.name}** with a score of ${finalScore}.`);
     // loseChannel.send(`You fought well against **${winTeam.name}**. Better luck next time.`);
 }
