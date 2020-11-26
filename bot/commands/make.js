@@ -15,11 +15,13 @@ exports.run = async (client, message, args) => {
 // **SPEC**: ${info.spec}
 //     `)
 
-    message.delete();
+    // message.delete();
     // prodraft.makeDraft("001", "002");
 
-    let date = new Date();
-    console.log(`${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)} ${date.getDate()}, ${date.getFullYear()}`)
+    // let date = new Date();
+    // console.log(`${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)} ${date.getDate()}, ${date.getFullYear()}`)
+
+    try { prodraft.firstDraft(args[0], args[1]) } catch (e) {}
 
     console.log(`[BOT] > End of command entered by ${user.username}`);
 };

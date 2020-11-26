@@ -37,6 +37,79 @@ let awaitReaction = async (msg, filter) => {
     return reac;
 }
 
+
+exports.firstDraft = async (winningTeam, losingTeam) => {
+    let winTeam = teamsInfo.filter(t => t.id == winningTeam)[0];
+    let loseTeam = teamsInfo.filter(t => t.id == losingTeam)[0];
+
+    if (winTeam == null || loseTeam == null) return;
+
+    let winChannel = bot.channels.cache.get(winTeam.channel);
+    let loseChannel = bot.channels.cache.get(loseTeam.channel);
+
+    var m1;
+
+    winChannel.send(`**${loseTeam.name}** is selecting a side. Please wait while they select a side.`).then(msg => { m1 = msg });
+
+    loseChannel.send(`Please select the side you want to play:`).then(async msg => {
+        await msg.react("779217859589963786");
+        await msg.react("779217988079058986");
+
+        const filter = (reaction, user) => { return ['779217859589963786', '779217988079058986'].includes(reaction.emoji.id) && user.id != msg.author.id };
+        let reaction = await awaitReaction(msg, filter);
+
+        var team1, team2, winBlue=false;
+
+        switch (reaction) {
+            case "red":
+                m1.delete();
+                msg.delete();
+                team1 = winTeam.name;
+                team2 = loseTeam.name;
+                winBlue = true;
+                break;
+
+            case "blue":
+                m1.delete();
+                msg.delete();
+                team1 = loseTeam.name;
+                team2 = winTeam.name;
+                break;
+        
+            default:
+                break;
+        }
+
+        let prodraftInfo = await this.makeDraft(team1, team2);
+        prodraftInfo["win"] = prodraftInfo.red;
+        prodraftInfo["lose"] = prodraftInfo.blue;
+
+        if (winBlue) {
+            prodraftInfo["win"] = prodraftInfo.blue;
+            prodraftInfo["lose"] = prodraftInfo.red;
+        }
+
+        winChannel.send(`
+**${loseTeam.name}** has chosen *${reaction}* side.
+
+Here are your prodraft links. Finish them ASAP and wait until \`OPSE Admin\` or \`OPSE Replay\` tell you to start in the lobby.
+
+Main: ${prodraftInfo.win}
+Spec: ${prodraftInfo.spec}
+        `);
+
+        loseChannel.send(`
+You have chosen *${reaction}* side.
+
+Here are your prodraft links. Finish them ASAP and wait until \`OPSE Admin\` or \`OPSE Replay\` tell you to start in the lobby.
+
+Main: ${prodraftInfo.lose}
+Spec: ${prodraftInfo.spec}
+        `);
+
+    });
+}
+
 exports.sendDraft = async (winningTeam, losingTeam) => {
     let winTeam = teamsInfo.filter(t => t.id == winningTeam)[0];
     let loseTeam = teamsInfo.filter(t => t.id == losingTeam)[0];
