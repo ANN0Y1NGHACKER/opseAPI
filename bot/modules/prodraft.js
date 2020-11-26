@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const teamsInfo = require('../teamChannels.json');
+const logger = require('../../modules/log');
 const bot = global.DISCORD_BOT;
 
 exports.makeDraft = async (team1="BLUE TEAM", team2="RED TEAM", title="OPSE") => {
@@ -10,7 +11,7 @@ exports.makeDraft = async (team1="BLUE TEAM", team2="RED TEAM", title="OPSE") =>
             "matchName": title
         }
     }).then(body => {
-        console.log(`[BOT]     - Made prodraft`)
+        logger.bot("    - Made prodraft");
         let info = {
             blue: `http://prodraft.leagueoflegends.com/?draft=${body.id}&auth=${body.auth[0]}`,
             red: `http://prodraft.leagueoflegends.com/?draft=${body.id}&auth=${body.auth[1]}`,
