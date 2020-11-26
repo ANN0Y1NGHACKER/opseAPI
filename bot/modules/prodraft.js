@@ -108,6 +108,7 @@ Main: ${prodraftInfo.lose}
 Spec: ${prodraftInfo.spec}
         `);
 
+        bot.channels.cache.get("781658097713938493").send(`${loseTeam.emoji} **${loseTeam.name}** vs ${winTeam.emoji} **${winTeam.name}** prodraft link: ${prodraftInfo.spec}`);
     });
 }
 
@@ -163,7 +164,7 @@ exports.sendDraft = async (winningTeam, losingTeam) => {
         }
 
         winChannel.send(`
-**${loseTeam.name}** has chosen *${reaction}* side.
+${loseTeam.emoji} **${loseTeam.name}** has chosen *${reaction}* side.
 
 Here are your prodraft links. Finish them ASAP and wait until \`OPSE Admin\` or \`OPSE Replay\` tell you to start in the lobby.
 
@@ -180,6 +181,7 @@ Main: ${prodraftInfo.lose}
 Spec: ${prodraftInfo.spec}
         `);
 
+        bot.channels.cache.get("781658097713938493").send(`${loseTeam.emoji} **${loseTeam.name}** vs ${winTeam.emoji} **${winTeam.name}** prodraft link: ${prodraftInfo.spec}`);
     });
 }
 
