@@ -210,6 +210,7 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 });
 
 router.post('/lolMatchResult', async (req, res) => {
+	logger.server("here")
 	let finalmeta = {
 		team1_ID: "",
 		team2_ID: "",
