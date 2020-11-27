@@ -1,7 +1,7 @@
 const opseAPI = require('../../modules/API');
 const Discord = require('discord.js');
 const logger = require('../../modules/log');
-const console = new logger("bot");
+const console = new logger("BOT", "cyan");
 
 const emojis = {
     101: "<:Warriors:745741444135780512>",

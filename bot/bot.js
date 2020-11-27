@@ -5,7 +5,7 @@ if (process.argv[2]) if (process.argv[2] == "BOT") {
 }
 
 const logger = require('../modules/log');
-const console = new logger("bot");
+const console = new logger("BOT", "cyan");
 const Discord = require('discord.js');
 const fs = require('fs');
 

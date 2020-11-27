@@ -1,7 +1,7 @@
 const request = require('request-promise');
 const teamsInfo = require('../teamChannels.json');
 const logger = require('../../modules/log');
-const console = new logger("bot");
+const console = new logger("BOT", "cyan");
 
 exports.makeDraft = async (team1="BLUE TEAM", team2="RED TEAM", title="OPSE") => {
     let res = await request.post("http://prodraft.leagueoflegends.com/draft", {

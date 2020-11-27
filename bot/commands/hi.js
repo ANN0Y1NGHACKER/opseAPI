@@ -1,5 +1,5 @@
 const logger = require('../../modules/log');
-const console = new logger("bot");
+const console = new logger("BOT", "cyan");
 
 exports.run = (client, message, args) => {
     let userName = message.author.username

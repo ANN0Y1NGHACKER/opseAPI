@@ -2,6 +2,9 @@ const schedule = require('node-schedule');
 const DB = require('./SQL');
 const discord = require('../bot/modules/messageSend');
 
+const logger = require('../modules/log');
+const console = new logger("MATCH NOTIFIER");
+
 const teamChannels = require('../bot/teamChannels.json');
 
 schedule.scheduleJob('00 * * * * *', async () => {
@@ -27,5 +30,5 @@ schedule.scheduleJob('00 * * * * *', async () => {
         discord.sendMessage(team2.channel, `You have a game against **${team1.name}** in 2 minutes.`);
     }
 
-    if (gamesToNotify.length > 0) console.log(`[MATCH NOTIFIER] Notified ${gamesToNotify.length} games.`);
+    if (gamesToNotify.length > 0) console.log(`Notified ${gamesToNotify.length} games.`);
 });

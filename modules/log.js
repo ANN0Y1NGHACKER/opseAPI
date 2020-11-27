@@ -19,28 +19,9 @@ let getTime = () => {
 }
 
 module.exports = class Logger {
-    constructor(type) {
-        switch (type.toLowerCase()) {
-            case "server":
-                this.pre_text = "SERVER";
-                this.pre_color = "yellow";
-                break;
-
-            case "bot":
-                this.pre_text = "BOT";
-                this.pre_color = "cyan";
-                break;
-
-            case "mn":
-                this.pre_text = "MATCH NOTIFIER";
-                this.pre_color = "magenta";
-                break;
-        
-            default:
-                this.pre_text = "LOG";
-                this.pre_color = "green";
-                break;
-        }
+    constructor(prefix="LOG", color="green") {
+        this.pre_text = prefix;
+        this.pre_color = color;
     }
 
     log(msg) {

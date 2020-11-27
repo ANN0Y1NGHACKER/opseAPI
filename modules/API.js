@@ -1,4 +1,6 @@
 const DB = require('./SQL');
+const logger = require('../modules/log');
+const console = new logger("API");
 
 exports.getTeams = async (allinfo = false) => {
     let res = [];

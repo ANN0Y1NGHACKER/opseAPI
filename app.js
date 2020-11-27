@@ -1,3 +1,4 @@
+process.stdout.write("\n")
 require('dotenv-flow').config();
 
 const fs = require('fs');
@@ -5,7 +6,7 @@ if (!fs.existsSync("./app.log")) fs.writeFile("./app.log", "", (err) => { if (er
 else fs.appendFile("./app.log", `\nNew Session Started\n`, (err) => { if (err) throw err });
 
 const logger = require('./modules/log');
-const console = new logger("SERVER");
+const console = new logger("SERVER", "yellow");
 
 const config = require('./config').init();
 global.CONFIG = config;

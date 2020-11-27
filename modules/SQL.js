@@ -1,5 +1,7 @@
 const config = global.CONFIG;
 const mysql = require('mysql');
+const logger = require('../modules/log');
+const console = new logger("SQL");
 
 var db;
 

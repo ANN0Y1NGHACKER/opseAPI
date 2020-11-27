@@ -1,6 +1,6 @@
 let prodraft = require('../modules/prodraft');
 const logger = require('../../modules/log');
-const console = new logger("bot");
+const console = new logger("BOT", "cyan");
 
 
 exports.run = async (client, message, args) => {
