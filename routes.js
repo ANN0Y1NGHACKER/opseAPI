@@ -1,5 +1,5 @@
 const config = global.CONFIG;
-const logger = require('../modules/log');
+const logger = require('./modules/log');
 const console = new logger("SERVER", "yellow");
 
 const exec = require('util').promisify(require('child_process').exec);
