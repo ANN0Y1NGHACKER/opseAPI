@@ -1,11 +1,15 @@
 let prodraft = require('../modules/prodraft');
+const logger = require('../../modules/log');
+const console = new logger("bot");
+
 
 exports.run = async (client, message, args) => {
     let user = message.author;
 
     if (user.id != "220161488516546561") return;
 
-    console.log(`[BOT] \n[BOT] > ${user.username} typed the 'make' command.`);
+    console.log(` `);
+    console.log(`> ${user.username} typed the 'make' command.`);
 
 //     let info = await prodraft.makeDraft("TEST1", "TEST2", "TEST3");
 
@@ -23,5 +27,5 @@ exports.run = async (client, message, args) => {
 
     try { prodraft.firstDraft(args[0], args[1]) } catch (e) {}
 
-    console.log(`[BOT] > End of command entered by ${user.username}`);
+    console.log(`> End of command entered by ${user.username}`);
 };

@@ -1,11 +1,14 @@
 require('dotenv-flow').config();
+
+const fs = require('fs');
+if (!fs.existsSync("./app.log")) fs.writeFile("./app.log", "", (err) => { if (err) throw err });
+else fs.appendFile("./app.log", `\nNew Session Started\n`, (err) => { if (err) throw err });
+
 const logger = require('./modules/log');
+const console = new logger("SERVER");
+
 const config = require('./config').init();
 global.CONFIG = config;
-
-logger.init();
-
-if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
 
 const bodyParser = require('body-parser');
 const express = require("express");
@@ -20,7 +23,7 @@ app.use(express.static("public"));
 app.use(require("./routes"));
 
 server.listen(port, () => {
-    logger.server(`Server listening on port ${port}`)
-
+    console.log(`Server listening on port ${port}`)
+    if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
     // require('./modules/MatchNotifier');
 });

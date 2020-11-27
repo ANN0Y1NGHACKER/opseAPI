@@ -1,5 +1,7 @@
 const opseAPI = require('../../modules/API');
 const Discord = require('discord.js');
+const logger = require('../../modules/log');
+const console = new logger("bot");
 
 const emojis = {
     101: "<:Warriors:745741444135780512>",
@@ -155,7 +157,8 @@ let sendEmbed = async (channel, data, title, logo) => {
 exports.run = async (client, message, args) => {
     let user = message.author;
 
-    console.log(`[BOT] \n[BOT] > ${user.username} typed the 'standings' command.`);
+    console.log(` `);
+    console.log(`> ${user.username} typed the 'standings' command.`);
     let standings = await opseAPI.getStandings(true);
 
     if (args[0]) {
@@ -163,27 +166,27 @@ exports.run = async (client, message, args) => {
             case "1":
             case "hs":
                 sendEmbed(message.channel, standings["1"], "Hearthstone Standings", "hs_icon");
-                console.log(`[BOT]     - I displaying Hearthstone stats.`);
+                console.log(`    - I displaying Hearthstone stats.`);
                 break;
 
             case "2":
             case "lol":
                 sendEmbed(message.channel, standings["2"], "League of Legends Standings", "lol_icon");
-                console.log(`[BOT]     - I displaying League of Legends stats.`);
+                console.log(`    - I displaying League of Legends stats.`);
                 break;
 
 
             case "3":
             case "ow":
                 sendEmbed(message.channel, standings["3"], "Overwatch Standings", "ow_icon");
-                console.log(`[BOT]     - I displaying Overwatch stats.`);
+                console.log(`    - I displaying Overwatch stats.`);
                 break;
 
 
             case "4":
             case "rl":
                 sendEmbed(message.channel, standings["4"], "Rocket League Standings", "rl_icon");
-                console.log(`[BOT]     - I displaying Rocket League stats.`);
+                console.log(`    - I displaying Rocket League stats.`);
                 break;
         
             default:
@@ -191,12 +194,12 @@ exports.run = async (client, message, args) => {
         }
     }
     else {
-        console.log(`[BOT]     - I displaying ALL stats.`);
+        console.log(`    - I displaying ALL stats.`);
         sendEmbed(message.channel, standings["1"], "Hearthstone Standings", "hs_icon");
         sendEmbed(message.channel, standings["2"], "League of Legends Standings", "lol_icon");
         sendEmbed(message.channel, standings["3"], "Overwatch Standings", "ow_icon");
         sendEmbed(message.channel, standings["4"], "Rocket League Standings", "rl_icon");
     }
 
-    console.log(`[BOT] > End of command entered by ${user.username}`);
+    console.log(`> End of command entered by ${user.username}`);
 };

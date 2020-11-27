@@ -1,6 +1,8 @@
 const config = global.CONFIG;
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const logger = require('./modules/log');
+const console = new logger("SERVER");
+
+const exec = require('util').promisify(require('child_process').exec);
 const express = require("express");
 const axios = require('axios');
 const router = express.Router();
@@ -9,11 +11,7 @@ const urlparse = require('url-parse');
 
 const API = require('./modules/API');
 const prodraft = require('./bot/modules/prodraft');
-const bot = global.DISCORD_BOT;
 const teamChannels = require('./bot/teamChannels.json');
-const logger = require('./modules/log');
-
-let prodraftGames = ["199"];
 
 let wsUsers = JSON.parse(config.WS_USERS);
 
@@ -241,7 +239,6 @@ router.post('/lolMatchResult', async (req, res) => {
 
 	let isOver = await API.saveGame(body);
 	let date = new Date();
-	date.setTime(date.getTime()-18000);
 	if (!isOver[0]) {
 		axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
 			"content": `**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&left=${teamChannels.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamChannels.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true )** to download`
