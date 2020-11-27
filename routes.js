@@ -210,7 +210,6 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 });
 
 router.post('/lolMatchResult', async (req, res) => {
-	logger.server("here")
 	let finalmeta = {
 		team1_ID: "",
 		team2_ID: "",
@@ -239,8 +238,6 @@ router.post('/lolMatchResult', async (req, res) => {
 	}
 	
 	body.metaData["win_ID"] = winning_team;
-
-	logger.server(body)
 
 	let isOver = await API.saveGame(body);
 	let date = new Date();
