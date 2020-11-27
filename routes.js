@@ -239,6 +239,8 @@ router.post('/lolMatchResult', async (req, res) => {
 	
 	body.metaData["win_ID"] = winning_team;
 
+	logger.server(body)
+
 	let isOver = await API.saveGame(body);
 	let date = new Date();
 	if (!isOver[0]) {
