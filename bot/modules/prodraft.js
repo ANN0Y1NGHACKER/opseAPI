@@ -1,5 +1,5 @@
 const request = require('request-promise');
-const teamsInfo = require('../teamChannels.json');
+const teamsInfo = require('../teamsInfo.json');
 const logger = require('../../modules/log');
 const console = new logger("BOT", "cyan");
 
