@@ -13,6 +13,8 @@ const API = require('./modules/API');
 const prodraft = require('./bot/modules/prodraft');
 const teamsInfo = require('./bot/teamsInfo.json');
 
+const prodraftGames = [];
+
 let wsUsers = JSON.parse(config.WS_USERS);
 
 let sendJSON = (res, data, filter=[]) => {
