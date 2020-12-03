@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
     // let date = new Date();
     // console.log(`${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)} ${date.getDate()}, ${date.getFullYear()}`)
 
-    try { prodraft.firstDraft(args[0], args[1]) } catch (e) {}
+    // try { prodraft.firstDraft(args[0], args[1]) } catch (e) {}
 
     console.log(`> End of command entered by ${user.username}`);
 };
