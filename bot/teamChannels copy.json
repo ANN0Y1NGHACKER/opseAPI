@@ -1,6 +1,6 @@
 [
-    { "id": "204", "imgID": "001", "channel": "779283959753998336", "name": "Team 1" },
-    { "id": "206", "imgID": "002", "channel": "779284025839452190", "name": "Team 2" },
+    { "id": "204", "imgID": "001", "channel": "779283959753998336", "emoji": "<:Warriors:745741444135780512>", "name": "Team 1" },
+    { "id": "206", "imgID": "002", "channel": "779284025839452190", "emoji": "<:Ravens:745738497134035046>", "name": "Team 2" },
     
     { "id": "101", "imgID": "013", "channel": "779283959753998336", "emoji": "<:Warriors:745741444135780512>", "name": "Waterloo Warriors" },
     { "id": "102", "imgID": "001", "channel": "779283959753998336", "emoji": "<:Ravens:745738497134035046>", "name": "Carleton Ravens" },
