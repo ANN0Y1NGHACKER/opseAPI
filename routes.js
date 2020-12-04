@@ -268,6 +268,7 @@ router.post('/lolMatchResult', async (req, res) => {
 
 router.post("/git-pull", async (req, res) => {
 	if (req.body.head_commit.committer.name) {
+		console.log(req.body.head_commit.committer.name)
 		if (wsUsers.includes(req.body.head_commit.committer.name)) {
 			console.log("Pulling from git");
 			await exec('git reset --hard HEAD');
