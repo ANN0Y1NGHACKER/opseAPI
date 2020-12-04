@@ -13,7 +13,7 @@ const API = require('./modules/API');
 const prodraft = require('./bot/modules/prodraft');
 const teamsInfo = require('./bot/teamsInfo.json');
 
-const prodraftGames = ["202"];
+const prodraftGames = ["204"];
 
 let wsUsers = JSON.parse(config.WS_USERS);
 
