@@ -2,7 +2,6 @@ const request = require('request-promise');
 const teamsInfo = require('../teamsInfo.json');
 const logger = require('../../modules/log');
 const console = new logger("BOT", "cyan");
-const sendDiscord = require('./messageSend');
 
 exports.makeDraft = async (team1="BLUE TEAM", team2="RED TEAM", title="OPSE") => {
     let res = await request.post("http://prodraft.leagueoflegends.com/draft", {
@@ -182,7 +181,7 @@ Main: ${prodraftInfo.lose}
 Spec: ${prodraftInfo.spec}
         `);
 
-        sendDiscord.channel("781658097713938493").send(`${loseTeam.emoji} **${loseTeam.name}** vs ${winTeam.emoji} **${winTeam.name}** prodraft link: ${prodraftInfo.spec}`);
+        global.DISCORD_BOT.channels.cache.get("781658097713938493").send(`${loseTeam.emoji} **${loseTeam.name}** vs ${winTeam.emoji} **${winTeam.name}** prodraft link: ${prodraftInfo.spec}`);
     });
 }
 
@@ -192,7 +191,7 @@ exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
 
     if (winTeam == null || loseTeam == null) return;
 
-    sendDiscord.channel("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a score of ${finalScore}.`);
+    global.DISCORD_BOT.channels.cache.get("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a score of ${finalScore}.`);
     let winChannel = global.DISCORD_BOT.channels.cache.get(winTeam.channel);
     let loseChannel = global.DISCORD_BOT.channels.cache.get(loseTeam.channel);
 
