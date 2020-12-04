@@ -15,7 +15,6 @@ const teamsInfo = require('./bot/teamsInfo.json');
 
 const prodraftGames = ["204"];
 
-
 let wsUsers = JSON.parse(config.WS_USERS);
 
 let sendJSON = (res, data, filter=[]) => {
