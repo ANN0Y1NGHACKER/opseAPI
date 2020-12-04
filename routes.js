@@ -246,6 +246,8 @@ router.post('/lolMatchResult', async (req, res) => {
 			"content": `**[Click here](http://api.opsesports.ca/createImg-wide?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&left=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`
 		});
 
+		global.DISCORD_BOT.channels.cache.get("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a score of ${isOver[1][body.metaData.team1_ID]} - ${isOver[1][body.metaData.team2_ID]}.`);
+
 		if (prodraftGames.includes(body.metaData.matchID)) {
 			if (body.metaData.win_ID == body.metaData.team1_ID) prodraft.sendDraft(body.metaData.team1_ID, body.metaData.team2_ID);
 			else if (body.metaData.win_ID == body.metaData.team2_ID) prodraft.sendDraft(body.metaData.team2_ID, body.metaData.team1_ID);

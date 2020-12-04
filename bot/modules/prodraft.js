@@ -191,7 +191,7 @@ exports.finalSend = async (winningTeam, losingTeam, finalScore) => {
 
     if (winTeam == null || loseTeam == null) return;
 
-    global.DISCORD_BOT.channels.cache.get("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a score of ${finalScore}.`);
+    global.DISCORD_BOT.channels.cache.get("781658097713938493").send(`${winTeam.emoji} **${winTeam.name}** won against ${loseTeam.emoji} **${loseTeam.name}** with a final score of ${finalScore}.`);
     let winChannel = global.DISCORD_BOT.channels.cache.get(winTeam.channel);
     let loseChannel = global.DISCORD_BOT.channels.cache.get(loseTeam.channel);
 
