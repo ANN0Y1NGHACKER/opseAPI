@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
 Bot running version: \`1.0.3\`.
 Last update:
 \`\`\`
-Fixed week no. for auto Head to Head,
+Fixed week no. for auto Head to Head
 Discord message now displays game as well
   - Taimoor Tariq
 \`\`\`
