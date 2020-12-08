@@ -38,8 +38,9 @@ const teamsInfo = require('../bot/teamsInfo.json');
 
 let sendHeadToHead = (game, team1, team2) => {
     let date = new Date();
+    let gameDisp = (game.length == 2)?` ${game}`:game;
     axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-        "content": `­\n[PREVIEW](<http://api.opsesports.ca/createImg-wide?game=${game}&line1=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%209&left_logo=${team1.imgID}&right_logo=${team2.imgID}>) - [DOWNLOAD](<http://api.opsesports.ca/createImg-wide?game=${game}&line1=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%208&left_logo=${team1.imgID}&right_logo=${team2.imgID}&download=true>) | ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`
+        "content": `­\n[PREVIEW](<http://api.opsesports.ca/createImg-wide?game=${game}&line1=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%209&left_logo=${team1.imgID}&right_logo=${team2.imgID}>) - [DOWNLOAD](<http://api.opsesports.ca/createImg-wide?game=${game}&line1=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%208&left_logo=${team1.imgID}&right_logo=${team2.imgID}&download=true>) | \`${gameDisp}\` ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`
     });
 }
 
