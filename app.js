@@ -25,6 +25,6 @@ app.use(require("./routes"));
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`)
-    if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
-    require('./modules/MatchNotifier');
+    // if (process.argv[2]) if (process.argv[2] == "ALL") require('./bot/bot');
+    // require('./modules/MatchNotifier');
 });

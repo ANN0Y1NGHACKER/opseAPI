@@ -6,7 +6,7 @@ module.exports = async client => {
 	console.log(`Logged in as ${client.user.tag}!`);
 
 	// client.user.setPresence({
-    //     // status: "invisible",
+    //     status: "invisible",
     //     // game: {
     //     //     name: "ANN0Y1NGHACKER code me",
     //     //     type: "WATCHING" // PLAYING, WATCHING, LISTENING, STREAMING,
