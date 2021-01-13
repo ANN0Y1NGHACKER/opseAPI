@@ -60,14 +60,14 @@ router.post('/lolMatchResult', async (req, res) => {
             "content": `
 \`\`\`js
 {
-"tournamentcode": "${body.shortCode}",
-"riot-gameID": "${body.gameId}",
-"metadata": {
-    team1_ID: "${body.metaData.team1_ID}",
-    team2_ID: "${body.metaData.team2_ID}",
-    matchID: "${body.metaData.matchID}",
-    description:"${body.metaData.description}"
-},
+    "tournamentcode": "${body.shortCode}",
+    "riot-gameID": "${body.gameId}",
+    "metadata": {
+        team1_ID: "${body.metaData.team1_ID}",
+        team2_ID: "${body.metaData.team2_ID}",
+        matchID: "${body.metaData.matchID}",
+        description:"${body.metaData.description}"
+    }
 }
 \`\`\`
             `
