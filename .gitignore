@@ -1,6 +1,4 @@
 node_modules
 package-lock.json
 .env
-public/post.png
-*.log
-logs
+modules/image-generator/image.png

@@ -136,7 +136,7 @@
 				let l_score = document.forms[0]["l_score"].value;
 				let r_score = document.forms[0]["r_score"].value;
 
-				window.open(`/createImg-wide?game=${game}&l_score=${l_score}&r_score=${r_score}&line1=${line1}&line2=${line2}&line3=${line3}&crown=${crown}&left=${left}&right=${right}`);
+				window.open(`/image-generator/create?game=${game}&l_score=${l_score}&r_score=${r_score}&line1=${line1}&line2=${line2}&line3=${line3}&crown=${crown}&left=${left}&right=${right}`);
 			}
 
 			function makeHeadtoHead() {
@@ -147,7 +147,7 @@
 				let line2 = document.forms[0]["line2"].value;
 				let line3 = document.forms[0]["line3"].value;
 
-				window.open(`/createImg-wide?game=${game}&line1=${line1}&line2=${line2}&line3=${line3}&left_logo=${left}&right_logo=${right}`);
+				window.open(`/image-generator/create?game=${game}&line1=${line1}&line2=${line2}&line3=${line3}&left_logo=${left}&right_logo=${right}`);
 			}
 		</script>
 	</body>
