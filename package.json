@@ -1,0 +1,22 @@
+{
+    "version": "1.0.0",
+    "description": "OPSE API",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js",
+        "restart-server": "curl -X POST http://api.opsesports.ca/git-refresh"
+    },
+    "dependencies": {
+        "axios": "^0.21.0",
+        "body-parser": "^1.19.0",
+        "child_process": "^1.0.2",
+        "dotenv-flow": "^3.2.0",
+        "express": "^4.17.1",
+        "jimp": "^0.16.1",
+        "mysql": "^2.18.1"
+    },
+    "engines": {
+        "node": "12.x"
+    },
+    "license": "MIT"
+}
