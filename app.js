@@ -1,3 +1,4 @@
+require('dotenv-flow').config();
 const
     bodyParser = require('body-parser'),
     express = require('express'),
