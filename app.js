@@ -1,9 +1,11 @@
 const
+    bodyParser = require('body-parser'),
     express = require('express'),
     app = express()
 
-
-app.set('json replacer', null)
+app.use(bodyParser.json())
+    .use(express.urlencoded({ extended: true }))
+    .set('json replacer', null)
     .set('json spaces', 4)
     .use(require('./routes'))
     .use('/image-generator', require('./modules/image-generator'))
