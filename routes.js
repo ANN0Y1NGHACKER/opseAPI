@@ -3,7 +3,8 @@ const
     teamsInfo = require('./modules/teamsInfo.json'),
     // API = require('./modules/API'),
     express = require('express'),
-    router = express.Router()
+    router = express.Router(),
+    axios = require('axios')
 
 router.get("/", (req, res) => {res.end("OPSE API -  v1.0.0")});
 router.get("/index.php", (req, res) => {res.end("OPSE API -  v1.0.0")});
