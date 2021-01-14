@@ -7,6 +7,19 @@ const
     router = express.Router(),
     axios = require('axios')
 
+let sendJSON = (res, data, filter=[]) => {
+    if (filter.length != 0) {
+        newData = [];
+        for (var i in filter[1]) {
+            if (newData.length == 0) newData = data.filter(d => d[filter[1][i]] == filter[0]);
+            else break;
+        }
+        data = newData;
+    }
+
+    res.json(data);
+};
+
 router.get("/", (req, res) => {res.end("OPSE API -  v1.0.0")});
 router.get("/index.php", (req, res) => {res.end("OPSE API -  v1.0.0")});
 
