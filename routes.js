@@ -1,4 +1,5 @@
 const
+    config = global.CONFIG;
     exec = require('util').promisify(require('child_process').exec),
     teamsInfo = require('./modules/teamsInfo.json'),
     API = require('./modules/API'),
@@ -8,6 +9,8 @@ const
 
 router.get("/", (req, res) => {res.end("OPSE API -  v1.0.0")});
 router.get("/index.php", (req, res) => {res.end("OPSE API -  v1.0.0")});
+
+router.get("/test", (req, res) => {res.send(teamsInfo.filter(t => t.id == "206"))});
 
 router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	let requestData = {
@@ -19,7 +22,7 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	}
 	if (req.params.type) if (req.params.type.toLowerCase() == "all") requestData.spectatorType = "ALL";
 
-	axios.post(`https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=${process.env.RIOT_ID}&api_key=${process.env.RIOT_API}`, requestData).then((body) => {
+    axios.post(`https://americas.api.riotgames.com/lol/tournament/v4/codes?count=1&tournamentId=${config.RIOT_ID}&api_key=${config.RIOT_API}`, requestData).then((body) => {
         res.send(body.data[0]);
     })
     .catch((error) => {
@@ -56,7 +59,7 @@ router.post('/lolMatchResult', async (req, res) => {
 	body.metaData = finalmeta;
 
     if ("test" in body) {
-        axios.post(`https://discord.com/api/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
+        axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
             "content": `
 \`\`\`js
 {
@@ -89,12 +92,12 @@ router.post('/lolMatchResult', async (req, res) => {
         let isOver = await API.saveGame(body);
         let date = new Date();
         if (!isOver[0]) {
-            axios.post(`https://discord.com/api/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
+            axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
                 "content": `**[Click here](http://api.opsesports.ca/image-generator/create?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&left=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`
             });
         }
         else {
-            axios.post(`https://discord.com/api/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
+            axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
                 "content": `**[Click here](http://api.opsesports.ca/image-generator/create?game=lol&l_score=${isOver[1][body.metaData.team1_ID]}&r_score=${isOver[1][body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${new Intl.DateTimeFormat('en', { month: 'short' }).format(date)}%20${date.getDate()},%20${date.getFullYear()}&crown=true&left=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}&download=true)** to download`
             });
         }
