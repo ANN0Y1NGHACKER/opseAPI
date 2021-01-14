@@ -12,6 +12,44 @@ router.get("/index.php", (req, res) => {res.end("OPSE API -  v1.0.0")});
 
 router.get("/test", (req, res) => {res.send(teamsInfo.filter(t => t.id == "206"))});
 
+
+router.get('/teams/:id?.:min?', async (req, res) => {
+	let data = await API.getTeams(true);
+	if (req.params.min == "min") data = await API.getTeams();
+	if (req.params.id) sendJSON(res, data, [req.params.id, ["id", "abbrev"]]);
+	else sendJSON(res, data);
+});
+
+router.get('/schools/:id?.:min?', async (req, res) => {
+	let data = await API.getSchools(true);
+	if (req.params.min == "min") data = await API.getSchools();
+	if (req.params.id) sendJSON(res, data, [req.params.id, ["id", "abbrev"]]);
+	else sendJSON(res, data);
+});
+
+router.get('/leagues/:id?.:min?', async (req, res) => {
+	let data = await API.getLeagues(true);
+	if (req.params.min == "min") data = await API.getLeagues();
+	if (req.params.id) sendJSON(res, data, [req.params.id, ["id", "name"]]);
+	else sendJSON(res, data);
+});
+
+router.get('/players/:id?.:min?', async (req, res) => {
+	let data = await API.getPlayers();
+	if (req.params.id) data = await API.getPlayers(true);
+	if (req.params.min == "min") data = await API.getPlayers();
+	if (req.params.id) sendJSON(res, data, [req.params.id, ["id"]]);
+	else sendJSON(res, data);
+});
+
+router.get('/standings/:id?.:min?', async (req, res) => {
+	let data = await API.getStandings(true);
+	if (req.params.min == "min") data = await API.getStandings();
+	if (req.params.id) sendJSON(res, data[req.params.id]);
+	else sendJSON(res, data);
+});
+
+
 router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	let requestData = {
         "mapType": "SUMMONERS_RIFT",
