@@ -246,9 +246,9 @@ exports.getStandings = async (allinfo = false) => {
             data['name'] = schools.filter(s => s.ID == teams.filter(t => t.ID == data.teamID)[0].schoolID)[0].teamName;
         }
         res[scores[i].league].push(data);
-    }
 
-    return res;
+        if (parseInt(i)+1 == scores.length) return res;
+    }
 }
 
 
