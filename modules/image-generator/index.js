@@ -107,7 +107,10 @@ router.get('/create', async (req, res) => {
 
         data[0].write(`${__dirname}/image.png`, () => {
             if ("download" in query) res.download(`${__dirname}/image.png`);
-            else res.sendFile(`${__dirname}/image.png`);
+            else {
+                res.setheader('content-type', 'image/jpeg');
+                res.sendFile(`${__dirname}/image.png`);
+            }
 		});
     });
 });
