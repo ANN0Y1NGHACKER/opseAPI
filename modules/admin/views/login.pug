@@ -1,0 +1,13 @@
+doctype html
+head
+    title OPSE API
+    style !{style}
+
+body.bg-dark.text-light
+    .login-container
+        .logo
+        form(action="/admin/login", method="post")
+            .input-group.mt-5
+                input.form-control(type="password", name="password" placeholder="Password")
+                .input-group-append
+                    input.btn.btn-primary(type="submit", value="LOGIN")

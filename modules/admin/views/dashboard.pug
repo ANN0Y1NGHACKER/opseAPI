@@ -1,0 +1,35 @@
+doctype html
+head
+    title OPSE API
+    style !{style}
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js")
+
+body.bg-dark.text-light
+    .wrapper
+        nav#sidebar
+            .sidebar-header
+                img(src="/assets/logos/logo-wide-light-text.svg" style="height= auto; widht: 100%;")
+
+            ul.list-unstyled
+                li
+                    a(herf="#images") Image Gen
+                li
+                    a.dropdown-toggle(href="#lol-toggle" data-toggle="collapse") League of Legends
+                    ul#lol-toggle.collapse.list-unstyled
+                        li
+                            a(herf="#lol-tourney") Tournament Codes
+
+        #content
+            #sidebarBtn.active
+                .icon
+                    i.fas.fa-bars
+
+
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    script.
+        $('#sidebarBtn').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $('#sidebarBtn').toggleClass('active');
+        });
