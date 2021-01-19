@@ -4,7 +4,7 @@
     "main": "app.js",
     "scripts": {
         "start": "nodemon app.js",
-        "restart-server": "curl -X POST http://api.opsesports.ca/git-refresh"
+        "restart-server": "node modules/restart-server.js"
     },
     "dependencies": {
         "axios": "^0.21.0",
