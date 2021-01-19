@@ -1,4 +1,4 @@
-const config = global.CONFIG;
+const config = require('../config');
 const mysql = require('mysql');
 
 var db;

@@ -1,6 +1,5 @@
 require('dotenv-flow').config();
-const config = require('./config').init();
-global.CONFIG = config;
+const config = require('./config');
 
 const
     bodyParser = require('body-parser'),

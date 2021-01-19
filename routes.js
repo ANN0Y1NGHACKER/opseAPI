@@ -1,5 +1,6 @@
 const
-    config = global.CONFIG;
+    project = require('./package.json'),
+    config = require('./config'),
     exec = require('util').promisify(require('child_process').exec),
     teamsInfo = require('./modules/teamsInfo.json'),
     API = require('./modules/API'),
@@ -20,11 +21,8 @@ let sendJSON = (res, data, filter=[]) => {
     res.json(data);
 };
 
-router.get("/", (req, res) => {res.end("OPSE API -  v1.0.0")});
-router.get("/index.php", (req, res) => {res.end("OPSE API -  v1.0.0")});
-
-router.get("/test", (req, res) => {res.send(teamsInfo.filter(t => t.id == "206"))});
-
+router.get("/", (req, res) => {res.end(`OPSE API -  v${project.version}`)});
+router.get("/index.php", (req, res) => {res.end(`OPSE API -  v${project.version}`)});
 
 router.get('/teams/:id?.:min?', async (req, res) => {
 	let data = await API.getTeams(true);
