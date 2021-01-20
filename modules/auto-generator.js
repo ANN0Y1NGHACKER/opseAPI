@@ -23,16 +23,16 @@ let sendHeadToHead = (game, team1, team2, date) => {
     });
 }
 
-let sendLoLcode = (mID, t1, t2, b) => {
+let sendLoLcode = (mID, t1, t2, b, game_time) => {
     let url = `http://api.opsesports.ca/tourneycode/${t1.id}%20${t2.id}%20${mID}%20${t1.name}%20@%20${t2.name}`;
     if (!b) url = `${url}.ALL`
-    let time = new Date();
+    let time = new Date(game_time);
 
     axios.get(url).then(res => {
         let code = res.data;
 
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
-            "content": `­\n${t1.emoji} @ ${t1.emoji} - **${time.getHours()<10?`0${time.getHours()}`:time.getHours()}:00** ${b?"<:twitch:765254683811381290>":""}\`\`\`${code}\`\`\``,
+            "content": `­\n${t1.emoji} @ ${t2.emoji} - **${time.getHours()<10?`0${time.getHours()}`:time.getHours()}:00** ${b?"<:twitch:765254683811381290>":""}\`\`\`${code}\`\`\``,
         });
     })
 }
@@ -65,11 +65,11 @@ let checkGames = async (today) => {
                 let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
                 let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
         
-                if (game.leagueID == 2) sendLoLcode(game.ID, team1, team2, game.broadcast);
+                if (game.leagueID == 2) sendLoLcode(game.ID, team1, team2, game.broadcast, game.date);
             });
         });
     }
 }
 
-// schedule.scheduleJob('35 * * * * *', checkGames);
+// schedule.scheduleJob('10 * * * * *', checkGames);
 schedule.scheduleJob('00 11 * * *', checkGames);
