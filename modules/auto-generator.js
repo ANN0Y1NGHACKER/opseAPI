@@ -4,17 +4,22 @@ const
     config = require('../config'),
     schedule = require('node-schedule'),
     teamsInfo = require('./teamsInfo.json'),
-    leagues = ["hs", "lol", "ow", "rl"];
+    leagues = ["hs", "lol", "ow", "rl"],
+    league_emojis = {
+        lol: "<:LoL:745802103871766601>",
+        ow: "<:Overwatch:745802104035213342>",
+        rl: "<:RocketLeague:745802104010178630>",
+        hs: "<:Hearthstone:745802103947132979>",
+    };;
 
 let sendHeadToHead = (game, team1, team2, date) => {
     let week = Math.floor(((date.getDate()-18)+(date.getMonth()+1))/7)+10;
-    let gameDisp = (game.length == 2)?` ${game}`:game;
     let short_month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
 
     let imgURL = `http://api.opsesports.ca/image-generator/create?game=${game}&line1=${short_month}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%20${week}&left_logo=${team1.imgID}&right_logo=${team2.imgID}`;
 
     axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-        "content": `­\n[PREVIEW](<${imgURL}>) - [DOWNLOAD](<${imgURL}&download=true>) | \`${gameDisp}\` ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`,
+        "content": `­\n[PREVIEW](<${imgURL}>) - [DOWNLOAD](<${imgURL}&download=true>) | ${league_emojis[game]} ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`,
     });
 }
 
