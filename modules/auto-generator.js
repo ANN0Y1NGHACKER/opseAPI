@@ -19,8 +19,22 @@ let sendHeadToHead = (game, team1, team2, date) => {
     let imgURL = `http://api.opsesports.ca/image-generator/create?game=${game}&line1=${short_month}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%20${week}&left_logo=${team1.imgID}&right_logo=${team2.imgID}`;
 
     axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-        "content": `­\n[PREVIEW](<${imgURL}>) - [DOWNLOAD](<${imgURL}&download=true>) | ${league_emojis[game]} ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`,
+        "content": `­\n${league_emojis[game]} | [PREVIEW](<${imgURL}>) - [DOWNLOAD](<${imgURL}&download=true>) | ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`,
     });
+}
+
+let sendLoLcode = (mID, t1, t2, b) => {
+    let url = `http://api.opsesports.ca/tourneycode/${t1.id}%20${t2.id}%20${mID}%20${t1.name}%20@%20${t2.name}`;
+    if (!b) url = `${url}.ALL`
+    let time = new Date();
+
+    axios.get(url).then(res => {
+        let code = res.data;
+
+        axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
+            "content": `­\n${t1.emoji} @ ${t1.emoji} - **${time.getHours()<10?`0${time.getHours()}`:time.getHours()}:00** ${b?"<:twitch:765254683811381290>":""}\`\`\`${code}\`\`\``,
+        });
+    })
 }
 
 let checkGames = async (today) => {
@@ -33,7 +47,7 @@ let checkGames = async (today) => {
 
     if (gamesToNotify.length > 0) {
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-            "content": `Head to Head for tonight's games`,
+            "content": `Head to Head for tonight's games.`,
         }).then(() => {
             gamesToNotify.forEach(game => {
                 let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
@@ -43,7 +57,19 @@ let checkGames = async (today) => {
                 sendHeadToHead(gameN, team1, team2, today);
             });
         });
+
+        axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
+            "content": `${league_emojis.lol} Tonights lol games.`,
+        }).then(() => {
+            gamesToNotify.forEach(game => {
+                let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
+                let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
+        
+                if (game.leagueID == 2) sendLoLcode(game.ID, team1, team2, game.broadcast);
+            });
+        });
     }
 }
 
-schedule.scheduleJob('00 11 * * *', checkGames);
+schedule.scheduleJob('35 * * * * *', checkGames);
+// schedule.scheduleJob('00 11 * * *', checkGames);
