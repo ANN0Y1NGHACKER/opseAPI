@@ -1,7 +1,8 @@
 require('dotenv-flow').config();
-const config = require('./config');
+require('./modules/auto-generator');
 
 const
+    config = require('./config'),
     express = require('express'),
     app = express()
 
