@@ -1,5 +1,5 @@
 require('dotenv-flow').config();
-// require('./modules/auto-generator');
+require('./modules/auto-generator');
 
 const
     config = require('./config'),
