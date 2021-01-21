@@ -3,7 +3,7 @@
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js",
+        "start": "forever start -c \"nodemon --exitcrash\" app.js",
         "restart-server": "node modules/restart-server.js"
     },
     "dependencies": {
