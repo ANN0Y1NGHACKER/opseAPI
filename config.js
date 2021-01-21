@@ -1,5 +1,5 @@
 module.exports = {
-    "PORT": () => process.env.PORT,
+    "PORT": process.env.PORT,
 
     "RIOT_ID": process.env.RIOT_ID,
     "RIOT_API": process.env.RIOT_API,
