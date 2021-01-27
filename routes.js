@@ -66,6 +66,11 @@ router.get('/standings/:id?.:min?', async (req, res) => {
 	else sendJSON(res, data);
 });
 
+router.get('/games-today/', async (req, res) => {
+	let data = await API.getTodayGames();
+	res.json(data);
+});
+
 
 router.get('/tourneycode/:meta.:type?', async (req, res) => {
 	let requestData = {

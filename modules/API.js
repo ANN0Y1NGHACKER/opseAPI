@@ -251,6 +251,22 @@ exports.getStandings = async (allinfo = false) => {
     }
 }
 
+exports.getTodayGames = async () => {
+    let res = [];
+
+    let today = new Date();
+    let schedule = await DB.getSchedule();
+
+    let gamesToNotify = schedule.filter(game => {
+        let game_time = new Date(game.date);
+        return game_time.getDate() == today.getDate() && game_time.getMonth() == today.getMonth() && game_time.getFullYear() == today.getFullYear();
+    });
+
+    gamesToNotify.map(game => { res.push(game) });
+
+    return res;
+}
+
 
 exports.checkPlayer = async name => {
     let players = await DB.getPlayers();

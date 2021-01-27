@@ -92,7 +92,7 @@ exports.recordGame = async (id, score1, score2) => {
 			return res(results);
 		});
 	});
-}
+};
 
 exports.recordLoLGame = async (GameID, MatchID, StartTime, Team1_ID, Team2_ID, WinningTeam_ID, Description, Tournament_Code) => {
 	return new Promise((res, err) => {
@@ -101,4 +101,4 @@ exports.recordLoLGame = async (GameID, MatchID, StartTime, Team1_ID, Team2_ID, W
 			return res(results);
 		});
 	});
-}
+};
