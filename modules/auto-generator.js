@@ -46,17 +46,17 @@ let checkGames = async (today) => {
     })
 
     if (gamesToNotify.length > 0) {
-        axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-            "content": `Head to Head for tonight's games.`,
-        }).then(() => {
-            gamesToNotify.forEach(game => {
-                let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
-                let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
-                let gameN = leagues[game.leagueID-1];
+        // axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
+        //     "content": `Head to Head for tonight's games.`,
+        // }).then(() => {
+        //     gamesToNotify.forEach(game => {
+        //         let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
+        //         let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
+        //         let gameN = leagues[game.leagueID-1];
         
-                sendHeadToHead(gameN, team1, team2, today);
-            });
-        });
+        //         sendHeadToHead(gameN, team1, team2, today);
+        //     });
+        // });
 
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
             "content": `${league_emojis.lol} Tonights lol games.`,
@@ -71,5 +71,5 @@ let checkGames = async (today) => {
     }
 }
 
-// schedule.scheduleJob('25 * * * * *', checkGames);
-schedule.scheduleJob('00 11 * * *', checkGames);
+schedule.scheduleJob('25 * * * * *', checkGames);
+// schedule.scheduleJob('00 11 * * *', checkGames);
