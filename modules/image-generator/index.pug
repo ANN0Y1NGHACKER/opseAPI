@@ -1,0 +1,260 @@
+doctype html
+mixin TEAMS_DROPDOWN
+    option(value="002") Concordia
+    option(value="003") Condors
+    option(value="008") Cougars
+    option(value="010") Excalibur
+    option(value="004") Falcons
+    option(value="006") Gaels
+    option(value="001") Ravens
+    option(value="011") Gee-Gees
+    option(value="014") Lancers
+    option(value="005") L Lions
+    option(value="016") Y Lions
+    option(value="015") Mustangs
+    option(value="007") Rams
+    option(value="009") Saints
+    option(value="012") U of T
+    option(value="013") Warriors
+
+head
+    title OPSE Image Generator
+    style !{style}
+
+body.bg-dark
+    .container.my-5
+        .card
+            .card-header
+                h1.mb-3 Image Generator
+
+                ul.nav.nav-tabs.card-header-tabs
+                    li.nav-item
+                        a(href="#h2h" data-toggle="tab").nav-link.active Head to Head
+
+                    li.nav-item
+                        a(href="#scorecard" data-toggle="tab").nav-link Scorecard
+
+            .tab-content
+                #h2h.tab-pane.fade.show.active
+                    form
+                        .card-body
+                            //- GAME SELECTION
+                            h3 Game
+                            .row
+                                .btn-group.btn-group-toggle(data-toggle="buttons")
+                                    lable.btn.btn-light.py-4.active
+                                        input(type="radio" name="game" checked="" value="lol")
+                                        img(src="/assets/images/lol-logo.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="hs")
+                                        img(src="/assets/images/hs-logo.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="ow")
+                                        img(src="/assets/images/ow-logo-dark.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="rl")
+                                        img(src="/assets/images/rl-logo.png" style="height: auto; width: 100px;")
+
+                            //- TEAMS
+                            h3.mt-4 Teams
+                            .row
+                                .col
+                                    .form-floating
+                                        select.form-select#left(name="left")
+                                            +TEAMS_DROPDOWN
+                                        label(for="left") Home Team
+
+                                .col
+                                    .form-floating
+                                        select.form-select#right(name="right")
+                                            +TEAMS_DROPDOWN
+                                        label(for="right") Away Team
+
+                            //- INFO
+                            h3.mt-4 Info
+                            .input-group.mb-2
+                                .input-group-prepend
+                                    span.input-group-text Presets
+                                .input-group-append
+                                    button.btn.btn-light.border(type="button" onclick="loadPreset('h2h')") LOAD
+                                    button.btn.btn-light.border(type="button" onclick="loadPreset()") CLEAR
+
+                            .row.mb-2
+                                .col
+                                    .form-floating
+                                        input#line1.form-control(type="text" name="line1" placeholder="score")
+                                        label(for="line1") Line 1
+
+                                .col
+                                    .form-floating
+                                        input#line2.form-control(type="text" name="line2" placeholder="score")
+                                        label(for="line2") Line 2
+
+                                .col
+                                    .form-floating
+                                        input#line3.form-control(type="text" name="line3" placeholder="score")
+                                        label(for="line3") Line 3
+
+
+                        .card-footer(style="height: 4em;")
+                            .form-inline.float-right
+                                input(type="button" value="GENERATE HEAD-TO-HEAD" onclick="makeHeadtoHead()").btn.btn-primary
+
+
+                #scorecard.tab-pane.fade
+                    form
+                        .card-body
+                            //- GAME SELECTION
+                            h3 Game
+                            .row
+                                .btn-group.btn-group-toggle(data-toggle="buttons")
+                                    lable.btn.btn-light.py-4.active
+                                        input(type="radio" name="game" checked="" value="lol")
+                                        img(src="/assets/images/lol-logo.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="hs")
+                                        img(src="/assets/images/hs-logo.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="ow")
+                                        img(src="/assets/images/ow-logo-dark.png" style="height: auto; width: 100px;")
+
+                                    lable.btn.btn-light.py-4
+                                        input(type="radio" name="game" value="rl")
+                                        img(src="/assets/images/rl-logo.png" style="height: auto; width: 100px;")
+
+                            h3.mt-4 Teams
+                            //- HOME TEAM
+                            .row
+                                .col-8
+                                    .form-floating
+                                        select.form-select#left(name="left")
+                                            +TEAMS_DROPDOWN
+                                        label(for="left") Home Team
+
+                                .col-4
+                                    .form-floating
+                                        input#l_score.form-control(type="text" name="l_score" placeholder="score")
+                                        label(for="l_score") Home Score
+
+                            //- AWAY TEAM
+                            .row.mt-3
+                                .col-8
+                                    .form-floating
+                                        select.form-select#right(name="right")
+                                            +TEAMS_DROPDOWN
+                                        label(for="right") Away Team
+
+                                .col-4
+                                    .form-floating
+                                        input#r_score.form-control(type="text" name="r_score" placeholder="score")
+                                        label(for="r_score") Away Score
+
+                            //- INFO
+                            h3.mt-4 Info
+                            .input-group.mb-2
+                                .input-group-prepend
+                                    span.input-group-text Presets
+                                .input-group-append
+                                    button.btn.btn-light.border(type="button" onclick="loadPreset('final')") FINAL SCORE
+                                    button.btn.btn-light.border(type="button" onclick="loadPreset('live')") LIVE NOW
+                                    button.btn.btn-light.border(type="button" onclick="loadPreset()") CLEAR
+
+                            .row.mb-2
+                                .col
+                                    .form-floating
+                                        input#line1.form-control(type="text" name="line1" placeholder="score")
+                                        label(for="line1") Line 1
+
+                                .col
+                                    .form-floating
+                                        input#line2.form-control(type="text" name="line2" placeholder="score")
+                                        label(for="line2") Line 2
+
+                                .col
+                                    .form-floating
+                                        input#line3.form-control(type="text" name="line3" placeholder="score")
+                                        label(for="line3") Line 3
+
+
+                        .card-footer(style="height: 4em;")
+                            .form-inline.float-right
+                                .custom-control.custom-switch.mr-3
+                                    input#crown(type="checkbox" name="crown").custom-control-input
+                                    label(for="crown").custom-control-label Show Crown
+                                input(type="button" value="GENERATE SCORECARD" onclick="makeScoreCard()").btn.btn-primary
+
+
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js")
+    script.
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            loadPreset("h2h");
+        });
+
+        function loadPreset(pre) {
+            let date = new Date();
+            let week = Math.floor(((date.getDate()-18)+(date.getMonth()+1))/7)+10;
+            let short_month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+            let c_date = `${short_month} ${date.getDate()}, ${date.getFullYear()}`;
+
+            switch (pre) {
+                case "final":
+                    document.forms[1]["line1"].value = "FINAL SCORE";
+                    document.forms[1]["line2"].value = "Regular Season";
+                    document.forms[1]["line3"].value = c_date;
+                    break;
+
+                case "live":
+                    document.forms[1]["line1"].value = "LIVE NOW";
+                    document.forms[1]["line2"].value = "Regular Season";
+                    document.forms[1]["line3"].value = c_date;
+                    break;
+
+                case "h2h":
+                    document.forms[0]["line1"].value = c_date;
+                    document.forms[0]["line2"].value = "Regular Season";
+                    document.forms[0]["line3"].value = `Week ${week}`;
+                    break;
+
+                default:
+                    document.forms[0]["line1"].value = "";
+                    document.forms[0]["line2"].value = "";
+                    document.forms[0]["line3"].value = "";
+                    document.forms[1]["line1"].value = "";
+                    document.forms[1]["line2"].value = "";
+                    document.forms[1]["line3"].value = "";
+                    break;
+            }
+        }
+
+        function makeScoreCard() {
+            let game = document.forms[1]["game"].value;
+            let left = document.forms[1]["left"].value;
+            let right = document.forms[1]["right"].value;
+            let line1 = document.forms[1]["line1"].value;
+            let line2 = document.forms[1]["line2"].value;
+            let line3 = document.forms[1]["line3"].value;
+            let crown = document.forms[1]["crown"].checked;
+            let l_score = document.forms[1]["l_score"].value;
+            let r_score = document.forms[1]["r_score"].value;
+
+            window.open(`/image-generator/create?game=${game}&l_score=${l_score}&r_score=${r_score}&line1=${line1}&line2=${line2}&line3=${line3}&crown=${crown}&left=${left}&right=${right}`);
+        }
+
+        function makeHeadtoHead() {
+            let game = document.forms[0]["game"].value;
+            let left = document.forms[0]["left"].value;
+            let right = document.forms[0]["right"].value;
+            let line1 = document.forms[0]["line1"].value;
+            let line2 = document.forms[0]["line2"].value;
+            let line3 = document.forms[0]["line3"].value;
+
+            window.open(`/image-generator/create?game=${game}&line1=${line1}&line2=${line2}&line3=${line3}&left_logo=${left}&right_logo=${right}`);
+        }

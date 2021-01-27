@@ -1,9 +1,15 @@
 const jimp = require('jimp'),
     express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    sass = require('sass'),
+    pug = require('pug');
+
+router.use('/assets', express.static(`${__dirname}/assets`));
 
 router.get('/', async (req, res) => {
-    res.sendFile(`${__dirname}/index.html`)
+    res.send(pug.renderFile(`${__dirname}/index.pug`, {
+        style: sass.renderSync({file: `${__dirname}/index.scss`}).css.toString(),
+    }));
 });
 
 router.get('/create', async (req, res) => {

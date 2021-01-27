@@ -1,0 +1,64 @@
+@import url(https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css);
+@import url(/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Jura|Saira|Roboto);
+
+$opse-red: #D7282F;
+$opse-blue: #101820;
+
+$white: #F0F0F0;
+
+body {
+    font-family: Saira, sans-serif;
+    font-weight: 900;
+}
+
+.base {
+    position: relative;
+    padding-top: 56.25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    * {
+        position: absolute;
+        transform: translate(-50%, 0);
+        left: 50%;
+        border-radius: 10px;
+
+        &:hover { border: 2px solid $white; }
+    }
+
+    .gameSelect {
+        top: 4%;
+        height: 11%; width: 40%;
+        cursor: pointer;        
+    }
+
+    .line1 {
+        top: 2.25em;
+        font-family: Roboto;
+        font-weight: 900;
+        font-size: 2.39em;
+    }
+
+    .line2 {
+        top: 14em;
+        font-family: Jura;
+        font-weight: 900;
+        font-size: 2.3em;
+    }
+
+    .line3 {
+        top: 15.1em;
+        font-family: Roboto;
+        font-weight: 600;
+        font-size: 2.3em;
+    }
+
+    input {
+        background-color: #00000000;
+        border-color: #00000000;
+        text-align: center;
+        color: $white;
+    }
+}

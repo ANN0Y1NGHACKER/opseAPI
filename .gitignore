@@ -3,3 +3,4 @@ package-lock.json
 .env
 .vscode
 modules/image-generator/image.png
+* copy*
