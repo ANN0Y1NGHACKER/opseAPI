@@ -65,13 +65,13 @@ body.bg-dark
                                     .form-floating
                                         select.form-select#left(name="left")
                                             +TEAMS_DROPDOWN
-                                        label(for="left") Home Team
+                                        label(for="left") Away Team
 
                                 .col
                                     .form-floating
                                         select.form-select#right(name="right")
                                             +TEAMS_DROPDOWN
-                                        label(for="right") Away Team
+                                        label(for="right") Home Team
 
                             //- INFO
                             h3.mt-4 Info
@@ -134,12 +134,12 @@ body.bg-dark
                                     .form-floating
                                         select.form-select#left(name="left")
                                             +TEAMS_DROPDOWN
-                                        label(for="left") Home Team
+                                        label(for="left") Away Team
 
                                 .col-4
                                     .form-floating
                                         input#l_score.form-control(type="text" name="l_score" placeholder="score")
-                                        label(for="l_score") Home Score
+                                        label(for="l_score") Away Score
 
                             //- AWAY TEAM
                             .row.mt-3
@@ -147,12 +147,12 @@ body.bg-dark
                                     .form-floating
                                         select.form-select#right(name="right")
                                             +TEAMS_DROPDOWN
-                                        label(for="right") Away Team
+                                        label(for="right") Home Team
 
                                 .col-4
                                     .form-floating
                                         input#r_score.form-control(type="text" name="r_score" placeholder="score")
-                                        label(for="r_score") Away Score
+                                        label(for="r_score") Home Score
 
                             //- INFO
                             h3.mt-4 Info
