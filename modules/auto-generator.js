@@ -24,7 +24,7 @@ let sendHeadToHead = (game, team1, team2, date) => {
 }
 
 let sendLoLcode = (mID, t1, t2, b, game_time) => {
-    let url = `http://api.opsesports.ca/tourneycode/${t1.id}%20${t2.id}%20${mID}%20${t1.name}%20@%20${t2.name}`;
+    let url = `http://api.opsesports.ca/tourneycode/${t1.id}%20${t2.id}%20${mID}%20${t1.abbr}%20@%20${t2.abbr}`;
     if (!b) url = `${url}.ALL`
     let time = new Date(game_time);
 
@@ -46,18 +46,18 @@ let checkGames = async (today) => {
     })
 
     if (gamesToNotify.length > 0) {
-        // axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-        //     "content": `Head to Head for tonight's games.`,
-        // }).then(() => {
-        //     gamesToNotify.forEach(game => {
-        //         let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
-        //         let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
-        //         let gameN = leagues[game.leagueID-1];
+        axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
+            "content": `Head to Head for tonight's games.`,
+        }).then(() => {
+            gamesToNotify.forEach(game => {
+                let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
+                let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
+                let gameN = leagues[game.leagueID-1];
         
-        //         sendHeadToHead(gameN, team1, team2, today);
-        //     });
-        // });
-
+                sendHeadToHead(gameN, team1, team2, today);
+            });
+        });
+        
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
             "content": `${league_emojis.lol} Tonights lol games.`,
         }).then(() => {
@@ -71,5 +71,5 @@ let checkGames = async (today) => {
     }
 }
 
-schedule.scheduleJob('25 * * * * *', checkGames);
-// schedule.scheduleJob('00 11 * * *', checkGames);
+// schedule.scheduleJob('00 * * * * *', checkGames);
+schedule.scheduleJob('00 09 * * *', checkGames);
