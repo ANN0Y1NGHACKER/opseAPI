@@ -4,7 +4,7 @@
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {
-        "start": "forever start -c \"nodemon --exitcrash\" app.js",
+        "start": "forever .",
         "restart-server": "node modules/restart-server.js"
     },
     "dependencies": {

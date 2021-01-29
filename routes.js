@@ -93,8 +93,10 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 
 router.post('/git-refresh', async (req, res) => {
     console.log("Pulling from git");
+    await exec('forever stopall');
     await exec('git reset --hard HEAD');
     await exec('git pull');
+    await exec('forever .');
     res.end("Server in sync with git");
     console.log("Pulled from git");
 });
