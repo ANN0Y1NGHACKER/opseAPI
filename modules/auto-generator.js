@@ -71,5 +71,5 @@ let checkGames = async (today) => {
     }
 }
 
-// schedule.scheduleJob('00 * * * * *', checkGames);
-schedule.scheduleJob('00 09 * * *', checkGames);
+// schedule.scheduleJob('30 * * * * *', checkGames);
+// schedule.scheduleJob('00 09 * * *', checkGames);
