@@ -43,7 +43,9 @@ let checkGames = async (today) => {
     let gamesToNotify = games.filter(game => {
         let game_time = new Date(game.date);
         return game_time.getDate() == today.getDate() && game_time.getMonth() == today.getMonth() && game_time.getFullYear() == today.getFullYear();
-    })
+    });
+
+    let LoLgamesToNotify = gamesToNotify.filter(game => game.leagueID == 2);
 
     if (gamesToNotify.length > 0) {
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
@@ -57,19 +59,22 @@ let checkGames = async (today) => {
                 sendHeadToHead(gameN, team1, team2, today);
             });
         });
-        
+    }
+
+    if (LoLgamesToNotify.length > 0) {
+        LoLgamesToNotify.sort((a,b) => b.date - a.date);
         axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID2}/${config.WEBHOOK_TOKEN2}`, {
             "content": `${league_emojis.lol} Tonights lol games.`,
         }).then(() => {
-            gamesToNotify.forEach(game => {
+            LoLgamesToNotify.forEach(game => {
                 let team1 = teamsInfo.filter(t => t.id == game.teamID1)[0];
                 let team2 = teamsInfo.filter(t => t.id == game.teamID2)[0];
         
-                if (game.leagueID == 2) sendLoLcode(game.ID, team1, team2, game.broadcast, game.date);
+                sendLoLcode(game.ID, team1, team2, game.broadcast, game.date);
             });
         });
     }
 }
 
-schedule.scheduleJob('30 * * * * *', checkGames);
-// schedule.scheduleJob('00 09 * * *', checkGames);
+// schedule.scheduleJob('30 * * * * *', checkGames);
+schedule.scheduleJob('00 09 * * *', checkGames);

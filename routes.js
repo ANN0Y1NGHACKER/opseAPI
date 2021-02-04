@@ -160,7 +160,7 @@ router.post('/lolMatchResult', async (req, res) => {
             let imageURL = `http://api.opsesports.ca/image-generator/create/sc?game=lol&away_score=${data[body.metaData.team1_ID]}&home_score=${data[body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&away_logo=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&home_logo=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
 
             axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-                "content": `­\n${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
+                "content": `${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
             });
         }
         else {
@@ -169,12 +169,29 @@ router.post('/lolMatchResult', async (req, res) => {
             let imageURL = `http://api.opsesports.ca/image-generator/create/sc?game=lol&away_score=${data[body.metaData.team1_ID]}&home_score=${data[body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&away_logo=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&home_logo=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
 
             axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
-                "content": `­\n${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
+                "content": `${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
+            });
+
+            let msg_content = `${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} **${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].name}** won against ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} **${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].name}** with a score of ${data[body.metaData.team1_ID]} - ${data[body.metaData.team2_ID]}`;
+
+            if (data[body.metaData.team1_ID] < data[body.metaData.team2_ID]) msg_content = `${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} **${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].name}** won against ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} **${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].name}** with a score of ${data[body.metaData.team2_ID]} - ${data[body.metaData.team1_ID]}`;
+
+            axios({
+                method: "POST",
+                url: `https://discord.com/api/channels/781658097713938493/messages`,
+                headers: {
+                    "Authorization": `Bot ${process.env.BOT_TOKEN}`
+                },
+                data: {
+                    content: msg_content,
+                }
+            }).catch(e => {
+                console.log(e.response.data);
             });
         }
     }
 
-	res.send("LOGGED!!!");
+	res.end("LOGGED!!!");
 });
 
 module.exports = router;
