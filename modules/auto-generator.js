@@ -16,7 +16,7 @@ let sendHeadToHead = (game, team1, team2, date) => {
     let week = Math.floor(((date.getDate()-18)+(date.getMonth()+1))/7)+10;
     let short_month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
 
-    let imgURL = `http://api.opsesports.ca/image-generator/create?game=${game}&line1=${short_month}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%20${week}&left_logo=${team1.imgID}&right_logo=${team2.imgID}`;
+    let imgURL = `http://api.opsesports.ca/image-generator/create/h2h?game=${game}&line1=${short_month}%20${date.getDate()},%20${date.getFullYear()}&line2=Regular%20Season&line3=Week%20${week}&away_logo=${team1.imgID}&home_logo=${team2.imgID}`;
 
     axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
         "content": `­\n${league_emojis[game]} | [PREVIEW](<${imgURL}>) - [DOWNLOAD](<${imgURL}&download=true>) | ${team1.emoji} **${team1.name}** vs ${team2.emoji} **${team2.name}**`,
@@ -71,5 +71,5 @@ let checkGames = async (today) => {
     }
 }
 
-// schedule.scheduleJob('30 * * * * *', checkGames);
+schedule.scheduleJob('30 * * * * *', checkGames);
 // schedule.scheduleJob('00 09 * * *', checkGames);

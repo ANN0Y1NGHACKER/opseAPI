@@ -93,10 +93,10 @@ router.get('/tourneycode/:meta.:type?', async (req, res) => {
 
 router.post('/git-refresh', async (req, res) => {
     console.log("Pulling from git");
-    await exec('forever stopall');
+    await exec('kill $(lsof -t -i:3000)');
     await exec('git reset --hard HEAD');
     await exec('git pull');
-    await exec('forever .');
+    await exec('npm start');
     res.end("Server in sync with git");
     console.log("Pulled from git");
 });
@@ -157,7 +157,7 @@ router.post('/lolMatchResult', async (req, res) => {
         if (!isOver[0]) {
             let data = isOver[1];
 
-            let imageURL = `http://api.opsesports.ca/image-generator/create?game=lol&l_score=${data[body.metaData.team1_ID]}&r_score=${data[body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&left=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
+            let imageURL = `http://api.opsesports.ca/image-generator/create/sc?game=lol&away_score=${data[body.metaData.team1_ID]}&home_score=${data[body.metaData.team2_ID]}&line1=LIVE%20NOW&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&away_logo=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&home_logo=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
 
             axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
                 "content": `­\n${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
@@ -166,7 +166,7 @@ router.post('/lolMatchResult', async (req, res) => {
         else {
             let data = isOver[1];
 
-            let imageURL = `http://api.opsesports.ca/image-generator/create?game=lol&l_score=${data[body.metaData.team1_ID]}&r_score=${data[body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&left=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&right=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
+            let imageURL = `http://api.opsesports.ca/image-generator/create/sc?game=lol&away_score=${data[body.metaData.team1_ID]}&home_score=${data[body.metaData.team2_ID]}&line1=FINAL%20SCORE&line2=Regular%20Season&line3=${short_month}%20${date.getDate()},%20${date.getFullYear()}&away_logo=${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].imgID}&home_logo=${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].imgID}`;
 
             axios.post(`https://discord.com/api/webhooks/${config.WEBHOOK_ID}/${config.WEBHOOK_TOKEN}`, {
                 "content": `­\n${league_emojis.lol} | [PREVIEW](<${imageURL}>) - [DOWNLOAD](<${imageURL}&download=true>) | \`${data[body.metaData.team1_ID]}\` ${teamsInfo.filter(t => t.id == body.metaData.team1_ID)[0].emoji} vs ${teamsInfo.filter(t => t.id == body.metaData.team2_ID)[0].emoji} \`${data[body.metaData.team2_ID]}\``,
