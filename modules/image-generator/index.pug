@@ -138,7 +138,7 @@ body.bg-dark
 
                                 .col-4
                                     .form-floating
-                                        input#l_score.form-control(type="text" name="away_score" placeholder="score" required="")
+                                        input#l_score.form-control(type="text" name="away_score" placeholder="score" value="0" required="")
                                         label(for="l_score") Away Score
 
                             //- AWAY TEAM
@@ -151,7 +151,7 @@ body.bg-dark
 
                                 .col-4
                                     .form-floating
-                                        input#r_score.form-control(type="text" name="home_score" placeholder="score" required="")
+                                        input#r_score.form-control(type="text" name="home_score" placeholder="score" value="0" required="")
                                         label(for="r_score") Home Score
 
                             //- INFO
@@ -213,7 +213,7 @@ body.bg-dark
 
         function loadPreset(pre) {
             let date = new Date();
-            let week = Math.floor(((date.getDate()-18)+(date.getMonth()+1))/7)+10;
+            let week = Math.floor(((date.getDate()-18)+(date.getMonth()+1))/7)+15;
             let short_month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
             let c_date = `${short_month} ${date.getDate()}, ${date.getFullYear()}`;
 
