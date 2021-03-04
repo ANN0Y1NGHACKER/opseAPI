@@ -289,7 +289,7 @@ exports.saveGame = async body => {
     for (var i in fGames) scores[fGames[i].WinningTeam_ID]++;
 
     await DB.recordGame(body.metaData.matchID, scores[body.metaData.team1_ID], scores[body.metaData.team2_ID])
-    if (scores[body.metaData.team1_ID] == 2 || scores[body.metaData.team2_ID] == 2) return [true, scores];
+    if (scores[body.metaData.team1_ID] == 3 || scores[body.metaData.team2_ID] == 3) return [true, scores];
     // if (scores[body.metaData.team1_ID] > 2 || scores[body.metaData.team2_ID] > 2) return [true, scores];
 
     return [false, scores];
