@@ -29,8 +29,8 @@ router.get('/create/:type', async (req, res) => {
             if (!("away_score" in req.query)) missing_params.push(" away_score");
             if (("home_logo" in req.query) && (parseInt(req.query.home_logo) > 16 || parseInt(req.query.home_logo) < 0)) return res.status(404).end(`Invalid home_logo`);
             if (("away_logo" in req.query) && (parseInt(req.query.away_logo) > 16 || parseInt(req.query.away_logo) < 0)) return res.status(404).end(`Invalid away_logo`);
-            if (("home_score" in req.query) && (parseInt(req.query.home_score) > 3 || parseInt(req.query.home_score) < 0)) return res.status(404).end(`Invalid home_score`);
-            if (("away_score" in req.query) && (parseInt(req.query.away_score) > 3 || parseInt(req.query.away_score) < 0)) return res.status(404).end(`Invalid away_score`);
+            if (("home_score" in req.query) && (parseInt(req.query.home_score) > 5 || parseInt(req.query.home_score) < 0)) return res.status(404).end(`Invalid home_score`);
+            if (("away_score" in req.query) && (parseInt(req.query.away_score) > 5 || parseInt(req.query.away_score) < 0)) return res.status(404).end(`Invalid away_score`);
             break;
     
         default:
