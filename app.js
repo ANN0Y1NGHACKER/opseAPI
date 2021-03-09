@@ -2,7 +2,6 @@ require('dotenv-flow').config();
 // require('./modules/auto-generator');
 
 const
-    config = require('./config'),
     express = require('express'),
     app = express()
 
@@ -21,6 +20,9 @@ app.use(require('express-session')({
     .use(express.static('public'))
 
 
-app.listen(3000, () => {
-    console.log("Server started on port: 3000")
+
+require('kill-port')(3000).then(() => {
+    app.listen(3000, () => {
+        console.log("Server started on port: 3000")
+    });
 });
