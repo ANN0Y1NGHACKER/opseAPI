@@ -1,4 +1,6 @@
-const DB = require('./SQL');
+const
+    DB = require('./SQL'),
+    LoL_GAMES = require('./admin/lol-stats/games.json');
 
 exports.getTeams = async (allinfo = false) => {
     let res = [];
@@ -251,6 +253,28 @@ exports.getStandings = async (allinfo = false) => {
     }
 }
 
+exports.getSchedule = async (allinfo = false) => {
+    let res = {};
+
+    let teams = await DB.getTeams();
+    let leagues = await DB.getLeagues();
+    let schools = await DB.getSchools();
+    let schedule = await DB.getSchedule();
+
+    for (var i in leagues) res[leagues[i].ID] = [];
+
+    for (var i in schedule) res[schedule[i].leagueID].push({
+        "GameID": schedule[i].ID,
+        "Team1": allinfo?schools.filter(s => s.ID == teams.filter(t => t.ID == schedule[i].teamID1)[0].schoolID)[0].teamName:schedule[i].teamID1,
+        "Team2": allinfo?schools.filter(s => s.ID == teams.filter(t => t.ID == schedule[i].teamID2)[0].schoolID)[0].teamName:schedule[i].teamID2,
+        "Team1_score": schedule[i].Team1_score,
+        "Team2_score": schedule[i].Team2_score,
+        "Date": new Date(schedule[i].date).toLocaleString(),
+    });
+
+    return res;
+}
+
 exports.getTodayGames = async () => {
     let res = [];
 
@@ -267,6 +291,12 @@ exports.getTodayGames = async () => {
     return res;
 }
 
+exports.getLoLgame = async id => {
+    let LOL_GAMES = await DB.getLoLgames();
+
+    return LOL_GAMES.filter(game => game.GameID == id);
+}
+
 
 exports.checkPlayer = async name => {
     let players = await DB.getPlayers();
@@ -279,7 +309,7 @@ exports.checkPlayer = async name => {
 exports.saveGame = async body => {
     await DB.recordLoLGame(body.gameId, body.metaData.matchID, body.startTime, body.metaData.team1_ID, body.metaData.team2_ID, body.metaData.win_ID, body.metaData.description, body.shortCode);
 
-    let games = await DB.getGames();
+    let games = await DB.getLoLgames();
     let fGames = games.filter(g => g.MatchID == body.metaData.matchID);
 
     let scores = {};

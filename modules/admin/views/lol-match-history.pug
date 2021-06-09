@@ -23,13 +23,13 @@ body.bg-dark
 
                 #navbarNavDropdown.collapse.navbar-collapse
                     ul.navbar-nav
-                        li.nav-item.active
+                        li.nav-item
                             a.nav-link(href="/admin/dashboard") Dashboard
 
                         li.nav-item
                             a.nav-link.disabled(href="/admin/schedule" tabindex="-1") Schedule
 
-                        li.nav-item.dropdown
+                        li.nav-item.dropdown.active
                             a.nav-link.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown") League of Legends
                             ul.dropdown-menu
                                 li
@@ -41,35 +41,19 @@ body.bg-dark
                 span.navbar-text OPSE API - v#{VERSION}
 
     .py-3.px-5.my-3
-        h1.text-light.mb-4 Dashboard
-        .card-columns
-            .card.mb-4
-                .card-body
-                    h5.card-title.font-weight-bold Schedule
-                    p.card-text Edit the schedule for games.
-                .card-footer
-                    .d-flex.justify-content-end
-                        a.btn.btn-link.disabled(href="#" tabindex="-1") COMING SOON
-                        a.btn.btn-primary.disabled(href="/admin/schedule" tabindex="-1") OPEN
+        h1.text-light.mb-4 LoL - Match History
+        .card
+            -var GAME_KEYS = Object.keys(GAMES)
+            .card-body.row
+                .col-3
+                    .list-group
+                    each KEY in GAME_KEYS
+                        button.list-group-item.list-group-item-action !{GAMES[KEY].meta.des}
 
-            .card.mb-4
-                .card-body
-                    h5.card-title.font-weight-bold League of Legends
-                    p.card-text All the data of the LoL Playoff Games.
+                .col
+                    h2 TEST
 
-                .card-footer
-                    .d-flex.justify-content-between.mb-3
-                        a.btn.btn-link.disabled.text-dark(href="#" tabindex="-1") Champion Stats
-                        .d-flex.justify-content-end
-                            a.btn.btn-link.disabled(href="#" tabindex="-1") COMING SOON
-                            a.btn.btn-primary.disabled(href="/admin/lol-games/champ-stats" tabindex="-1") OPEN
-                    .d-flex.justify-content-between
-                        a.btn.btn-link.disabled.text-dark(href="#" tabindex="-1") Match History
-                        a.btn.btn-primary(href="/admin/lol-games/match-history") OPEN
-
-
-            .card.text-center.mb-4
-                .card-body
-                    h5.card-title.font-weight-bold.mb-0 More features coming soon.
+                
+        
 
     script.

@@ -1,6 +1,6 @@
 {
     "name": "opse-api",
-    "version": "1.0.4",
+    "version": "1.1.0b",
     "description": "OPSE API",
     "main": "app.js",
     "scripts": {

@@ -76,7 +76,7 @@ exports.getSchedule = async () => {
 	});
 };
 
-exports.getGames = async () => {
+exports.getLoLgames = async () => {
     return new Promise((res, err) => {
 		db.query(`SELECT * FROM lol_games`, (error, results, fields) => {
             if (error) return err(error);

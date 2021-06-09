@@ -66,9 +66,24 @@ router.get('/standings/:id?.:min?', async (req, res) => {
 	else sendJSON(res, data);
 });
 
+router.get('/schedule/:id?.:min?', async (req, res) => {
+	let data = await API.getSchedule(true);
+	if (req.params.min == "min") data = await API.getSchedule();
+	// if (req.params.id) sendJSON(res, data[req.params.id]);
+	// else sendJSON(res, data);
+    res.json(data)
+});
+
 router.get('/games-today/', async (req, res) => {
 	let data = await API.getTodayGames();
 	res.json(data);
+});
+
+router.get('/match-history/:gameID.:raw?', async (req, res) => {
+	let data = await API.getLoLgame(req.params.gameID);
+
+    if (data.length == 0) res.end("Not an OPSE game");
+    else res.end("TEST");
 });
 
 

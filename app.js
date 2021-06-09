@@ -3,7 +3,8 @@ require('dotenv-flow').config();
 
 const
     express = require('express'),
-    app = express()
+    app = express(),
+    PORT = 3000;
 
 app.use(require('express-session')({
         secret: process.env.SESSION_KEY,
@@ -21,8 +22,8 @@ app.use(require('express-session')({
 
 
 
-require('kill-port')(3000).then(() => {
-    app.listen(3000, () => {
-        console.log("Server started on port: 3000")
+require('kill-port')(PORT).then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server started on port: ${PORT}`)
     });
 });
